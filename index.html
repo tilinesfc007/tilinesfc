@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TILINES FC</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/icono.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/icono.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/icono.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="mask-icon" href="./img/icono.png" color="#ff6b00">
+    <meta name="msapplication-TileColor" content="#ff6b00">
+    <meta name="theme-color" content="#000000">
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+        <p>Cargando TILINES FC...</p>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-img">
+                <img src="./img/icono.png" alt="Logo TILINES FC">
+            </div>
+            <h1>TILINES <span>FC</span></h1>
+        </div>
+        
+        <nav>
+            <ul id="menu">
+                <li><a href="#publicaciones"><i class="fas fa-newspaper"></i> PUBLICACIONES</a></li>
+                <li><a href="#nosotros"><i class="fas fa-users"></i> NOSOTROS</a></li>
+                <li><a href="#clan"><i class="fas fa-shield-alt"></i> CLAN</a></li>
+                <li><a href="#redes"><i class="fas fa-share-alt"></i> REDES</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Iconos que caen -->
+        <div class="falling-icon" style="left: 10%; animation-delay: 0s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        <div class="falling-icon" style="left: 30%; animation-delay: 2s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        <div class="falling-icon" style="left: 70%; animation-delay: 4s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        <div class="falling-icon" style="left: 90%; animation-delay: 6s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        
+        <div class="hero-content">
+            <h2>Bienvenidos <br>Somos...</h2>
+            <div class="changing-words">
+                <span>EQUIPO</span>
+                <span>HERMANOS</span>
+                <span>TILINES</span>
+            </div>
+            <p>Un grupo de jugadores apasionados por PUBG, unidos por la amistad y el espíritu competitivo. Únete a nuestra comunidad y forma parte de esta gran familia.</p>
+            <a href="https://t.me/+wei9FKSQL7UyMDVh" class="cta-button">ÚNETE AHORA <i class="fas fa-chevron-right"></i></a>
+        </div>
+        
+        <div class="slider">
+            <div class="slider-nav">
+                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <img src="./img/akmman.jpg" alt="Slider 1" class="active">
+            <img src="./img/pochi.jpg" alt="Slider 2">
+            <img src="./img/s12k.jpg" alt="Slider 3">
+        </div>
+    </section>
+    
+    <!-- Publicaciones -->
+    <section class="publicaciones" id="publicaciones">
+        <div class="section-title">
+            <h2>PUBLICACIONES</h2>
+        </div>
+        
+        <div class="posts-grid">
+            <div class="post-card">
+                <button class="like-btn" data-post-id="1"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="1">0</div>
+                <div class="post-img">
+                    <img src="./img/beta.webp" alt="beta_game">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fas fa-trophy"></i> BETA DEL JUEGO</h3>
+                    <p>Beta del juego para probar la jugabilidad que se implementara, pruebalo antes que todos.</p>
+                    <a href="#" class="read-more">Probar <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <button class="like-btn" data-post-id="2"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="2">0</div>
+                <div class="post-img">
+                    <img src="./img/tempo.webp" alt="Nueva Temporada">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fas fa-calendar-alt"></i> Nueva Temporada</h3>
+                    <p>¡Prepárate para la nueva temporada con emocionantes novedades y desafíos!</p>
+                    
+                    <!-- Contador regresivo -->
+                    <div class="countdown-container">
+                        <div class="countdown-title">TERMINA EN:</div>
+                        <div class="countdown" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">DÍAS</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">HORAS</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">MIN</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">SEG</span>
+                            </div>
+                        </div>
+                        <div class="countdown-date">10 DE SEPTIEMBRE 2025</div>
+                    </div>
+                    
+                    <a href="#" class="read-more">Más información <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <button class="like-btn" data-post-id="3"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="3">0</div>
+                <div class="post-img">
+                    <img src="./img/oficial.jpg" alt="oficial_game">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fa-solid fa-gamepad"></i> Versión Oficial</h3>
+                    <p>Descubre lo nuevo del juego que trae PUBG.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.tencent.ig&pcampaignid=web_share" class="read-more">Descargar <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Nosotros -->
+    <section id="nosotros">
+        <div class="section-title">
+            <h2>NOSOTROS</h2>
+        </div>
+        
+        <div class="team">
+            <!-- Miembro 1 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 10%; animation-delay: 0s;">
+                    <img src="./img/roda.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 30%; animation-delay: 3s;">
+                    <img src="./img/roda.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 70%; animation-delay: 6s;">
+                    <img src="./img/roda.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/1.png" alt="Miembro 1">
+                </div>
+                <div class="member-info">
+                    <h3>Líder TILIN</h3>
+                    <p>Fundador & Líder</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 2 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 20%; animation-delay: 5s;">
+                    <img src="./img/m4fe.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 50%; animation-delay: 4s;">
+                    <img src="./img/m4fe.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 80%; animation-delay: 7s;">
+                    <img src="./img/m4fe.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/2.png" alt="Miembro 2">
+                </div>
+                <div class="member-info">
+                    <h3>Co-TILIN</h3>
+                    <p>Estrategia & Tácticas</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 3 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 15%; animation-delay: 2s;">
+                    <img src="./img/fran.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 45%; animation-delay: 5s;">
+                    <img src="./img/fran.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 75%; animation-delay: 8s;">
+                    <img src="./img/fran.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/3.png" alt="Miembro 3">
+                </div>
+                <div class="member-info">
+                    <h3>Francotirador</h3>
+                    <p>Especialista en larga distancia</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 4 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 5%; animation-delay: 1.5s;">
+                    <img src="./img/piti.ico" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 35%; animation-delay: 4.5s;">
+                    <img src="./img/piti.ico" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 65%; animation-delay: 7.5s;">
+                    <img src="./img/piti.ico" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/4.png" alt="Miembro 4">
+                </div>
+                <div class="member-info">
+                    <h3>Asalto</h3>
+                    <p>Combate cercano</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 5 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 25%; animation-delay: 1.5s;">
+                    <img src="./img/s12kke.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 55%; animation-delay: 4.5s;">
+                    <img src="./img/s12kke.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 85%; animation-delay: 7.5s;">
+                    <img src="./img/s12kke.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/6.png" alt="Miembro 5">
+                </div>
+                <div class="member-info">
+                    <h3>Soporte</h3>
+                    <p>Suministros y apoyo</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 6 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 10%; animation-delay: 2.5s;">
+                    <img src="./img/akmman.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 40%; animation-delay: 5.5s;">
+                    <img src="./img/akmman.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 70%; animation-delay: 8.5s;">
+                    <img src="./img/akmman.jpg" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/7.png" alt="Miembro 6">
+                </div>
+                <div class="member-info">
+                    <h3>Conductor</h3>
+                    <p>Movilidad y transporte</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 7 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 15%; animation-delay: 0.7s;">
+                    <img src="./img/pochi.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 45%; animation-delay: 3.7s;">
+                    <img src="./img/pochi.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 75%; animation-delay: 6.7s;">
+                    <img src="./img/pochi.jpg" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/5.png" alt="Miembro 7">
+                </div>
+                <div class="member-info">
+                    <h3>Scout</h3>
+                    <p>Reconocimiento</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 8 -->
+            <div class="member-card">
+                <!-- Imágenes que caen específicas para este miembro -->
+                <div class="card-falling-icon" style="left: 20%; animation-delay: 1.7s;">
+                    <img src="./img/s12k.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 50%; animation-delay: 4.7s;">
+                    <img src="./img/s12k.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 80%; animation-delay: 7.7s;">
+                    <img src="./img/s12k.jpg" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/user.png" alt="Miembro 8">
+                </div>
+                <div class="member-info">
+                    <h3>Comunicaciones</h3>
+                    <p>Coordinación de equipo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Clan y Redes -->
+    <section class="clan-section" id="clan">
+        <div class="section-title">
+            <h2>CLAN</h2>
+        </div>
+        
+        <div class="clan-info">
+            <p>TILINES FC es un clan dentro del juego, jugadores que comparten la pasión por PUBG MOBILE y los videojuegos. Nos destacamos por nuestro trabajo en equipo, comunicación y sobre todo, por el ambiente de amistad que mantenemos.</p>
+            <p>Compartimos versiones, noticias del juego y buscar equipos para jugar</p>
+        </div>
+        
+        <a href="#" class="cta-button"><i class="fab fa-telegram"></i> UNIRSE AL GRUPO DE TELEGRAM</a>
+    </section>
+    
+    <section id="redes">
+        <div class="section-title">
+            <h2>REDES SOCIALES</h2>
+        </div>
+        
+        <div class="social-container">
+            <div class="social-box">
+                <i class="fab fa-telegram"></i>
+                <h3>Telegram</h3>
+                <p>Únete a nuestro grupo principal de comunicación</p>
+                <a href="https://t.me/+wei9FKSQL7UyMDVh">Unirse <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="social-box">
+                <i class="fab fa-discord"></i>
+                <h3>Discord</h3>
+                <p>Canales de voz para jugar y charlar</p>
+                <a href="#">Unirse(Pronto) <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="social-box">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>Síguenos para ver nuestros highlights</p>
+                <a href="#">Seguir(Pronto) <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+        <!-- Modal de Nueva Temporada -->
+<div class="modal-overlay" id="seasonModal">
+    <div class="modal-container">
+        <button class="modal-close" id="closeModal">&times;</button>
+        <h3 class="modal-title">Novedades de la Temporada</h3>
+        
+        <ul class="novedades-list">
+            <li>
+                <i class="fas fa-map-marked-alt"></i>
+                <div>
+                    <h4>Nuevo Mapa "Kiki"</h4>
+                    <p>Un mapa tropical con junglas densas y ruinas antiguas, perfecto para combates a corta y media distancia.</p>
+                </div>
+            </li>
+            <li>
+                <i class="fas fa-gun"></i>
+                <div>
+                    <h4>Nueva Arma: P90</h4>
+                    <p>Subfusil de alta cadencia con cargador de 50 balas, ideal para combates cerrados.</p>
+                </div>
+            </li>
+            <li>
+                <i class="fas fa-vest"></i>
+                <div>
+                    <h4>Equipamiento Táctico</h4>
+                    <p>Nuevos chalecos tácticos con habilidades especiales según su nivel (rastreo, camuflaje, etc.).</p>
+                </div>
+            </li>
+            <li>
+                <i class="fas fa-car-side"></i>
+                <div>
+                    <h4>Vehículo Aéreo</h4>
+                    <p>Globo de reconocimiento para scouting aéreo, con capacidad para 2 jugadores.</p>
+                </div>
+            </li>
+            <li>
+                <i class="fas fa-medal"></i>
+                <div>
+                    <h4>Sistema de Rangos Mejorado</h4>
+                    <p>Nuevas divisiones y recompensas exclusivas según tu desempeño en ranked.</p>
+                </div>
+            </li>
+            <li>
+                <i class="fas fa-tshirt"></i>
+                <div>
+                    <h4>Skin Exclusiva de Temporada</h4>
+                    <p>Desbloquea el set "Guardianes de Kiki" al alcanzar el nivel 100 del pase de batalla.</p>
+                </div>
+            </li>
+        </ul>
+        
+        <div class="modal-footer">
+            <a href="#" class="cta-button">VER TRAILER <i class="fas fa-play"></i></a>
+        </div>
+    </div>
+</div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">TILINES FC</div>
+        <div class="footer-links">
+            <a href="#publicaciones">Publicaciones</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#clan">Clan</a>
+            <a href="#redes">Redes</a>
+            <a href="https://t.me/+wei9FKSQL7UyMDVh">Contacto</a>
+        </div>
+    </footer>
+    
+    <!-- Botón para volver arriba -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Botón de like para la página -->
+    <div class="page-like-container">
+        <button class="page-like-btn" id="pageLikeBtn"><i class="far fa-heart"></i></button>
+        <div class="page-like-count" id="pageLikeCount">0</div>
+    </div>
+    
+    <script src="./script.js"></script>
+</body>
+</html>
