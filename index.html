@@ -16,6 +16,105 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+.season-gallery-container {
+    margin-bottom: 2rem;
+}
+
+.gallery-title {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    background: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.season-gallery {
+    height: 250px; 
+}
+
+@media (max-width: 768px) {
+    .season-gallery {
+        height: 180px;
+    }
+    
+    .gallery-title {
+        font-size: 1rem;
+    }
+}
+    /* Estilos para el modal de temporada */
+.modal-container {
+    max-width: 800px; /* Aumentamos un poco el ancho */
+}
+
+.season-gallery-container {
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.gallery-title {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.7);
+    padding: 0.5rem;
+    border-radius: 5px;
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    border: 1px solid var(--primary);
+}
+
+.season-gallery {
+    height: 350px; /* Aumentamos la altura */
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background-color: #111;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Cambiado a 'contain' para ver imágenes completas */
+    background-color: #000;
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .season-gallery {
+        height: 250px;
+    }
+    
+    .gallery-title {
+        font-size: 1rem;
+        top: -15px;
+    }
+}
+    </style>
 </head>
 
 <body>
@@ -49,7 +148,6 @@
     
     <!-- Hero Section -->
     <section class="hero">
-        <!-- Iconos que caen -->
         <div class="falling-icon" style="left: 10%; animation-delay: 0s;">
             <img src="./img/casco.png" alt="PUBG Helmet" width="30">
         </div>
@@ -381,41 +479,79 @@
                 <i class="fab fa-whatsapp"></i>
                 <h3>WhatsApp</h3>
                 <p>Nuestro Canal de WhatsApp.</p>
-                <a href="https://chat.whatsapp.com/JEqkBXy3WCLKVfEDjGugwo?mode=ac_t">Unirse <i class="fas fa-arrow-right"></i></a>
+                <a href="https://whatsapp.com/channel/0029Vb6cxh02kNFqdWRnDs3v">Unirse <i class="fas fa-arrow-right"></i></a>
             </div>
 
              <div class="social-box">
                 <i class="fab fa-facebook"></i>
                 <h3>Facebook</h3>
                 <p>Síguenos en nuestro grupo oficial</p>
-                <a href="https://facebook.com/[TU_PAGINA_AQUI]">Seguir <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61578581550500">Seguir <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
         <!-- Modal de Nueva Temporada -->
-        <div class="modal-overlay" id="seasonModal">
-            <div class="modal-container">
-            <button class="modal-close" id="closeModal">&times;</button>
-            <h3 class="modal-title">Novedades de la Temporada</h3>
+<div class="modal-overlay" id="seasonModal">
+    <div class="modal-container">
+        <button class="modal-close" id="closeModal">&times;</button>
+        <h3 class="modal-title">Novedades de la Temporada</h3>
         
-        <div class="season-gallery">
-            <div class="gallery-item active" data-index="0">
-                <img src="./img-temp/newmap.png" alt="Nueva Temporada">
-                <div class="gallery-caption">Mapa "RONDO"</div>
+        <div class="season-gallery-container">
+            <div class="season-gallery">
+                <div class="gallery-item active" data-index="0">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/1-1.jpg" alt="Filtración 1">
+                    <div class="gallery-caption">Nuevo X-Suit "DRAVION" (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="1">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/1-2.jpg" alt="Filtración 2">
+                    <div class="gallery-caption">Skin Mejorable AWM (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="2">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/1-3.jpg" alt="Filtración 3">
+                    <div class="gallery-caption">NUEVOS EMOTES X-SUIT (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="3">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/2-1.jpg" alt="Filtración 4">
+                    <div class="gallery-caption">PRIMER SET ULTIMATE (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="4">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/2-2.jpg" alt="Filtración 5">
+                    <div class="gallery-caption">Segundo SET ULTIMATE (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="5">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/2-3.jpg" alt="Filtración 6">
+                    <div class="gallery-caption">PRIMERA SKIN MEJORABLE "DSR" (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="6">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./img-temp/2-4.jpg" alt="Filtración 7">
+                    <div class="gallery-caption">AUG MEJORABLE (AGOSTO)</div>
+                </div>
+                <!-- Imágenes originales del modal -->
+                <div class="gallery-item" data-index="7">
+                    <img src="./img-temp/newmap.png" alt="Nueva Temporada">
+                    <div class="gallery-caption">Mapa "RONDO"</div>
+                </div>
+                <div class="gallery-item" data-index="8">
+                    <img src="./img-temp/nuevaarm.webp" alt="Nuevas Armas">
+                    <div class="gallery-caption">Nueva Arma ASM ABAKAN</div>
+                </div>
+                <div class="gallery-item" data-index="9">
+                    <img src="./img-temp/colab.avif" alt="Colaboraciones">
+                    <div class="gallery-caption">COLABORACION TRANSFORMERS</div>
+                </div>
             </div>
-            <div class="gallery-item" data-index="1">
-                <img src="./img-temp/nuevaarm.webp" alt="Nuevas Armas">
-                <div class="gallery-caption">Nueva Arma ASM ABAKAN</div>
+            
+            <div class="gallery-nav">
+                <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <div class="gallery-item" data-index="2">
-                <img src="./img-temp/colab.avif" alt="Colaboraciones">
-                <div class="gallery-caption">COLABORACION TRANSFORMERS</div>
-            </div>
-        </div>
-        
-        <div class="gallery-nav">
-            <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
-            <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
         </div>
         
         <ul class="novedades-list">
@@ -447,7 +583,6 @@
         </div>
     </div>
 </div>
-
 <button id="openGameBtn">
     <i class="fas fa-gamepad"></i>
 </button>
