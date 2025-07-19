@@ -461,7 +461,7 @@
         
         /* Slider */
         .slider {
-            width: 35%;
+            width: 50%;
             height: 400px;
             position: relative;
             border-radius: 10px;
@@ -1200,7 +1200,9 @@
             .social-box {
                 width: 100%;
             }
-            
+            .slider{
+                width: 110%;
+            }
             .slider-btn {
                 font-size: 1.5rem;
             }
