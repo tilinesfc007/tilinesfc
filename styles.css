@@ -1352,6 +1352,7 @@
 }
 
 #openGameBtn {
+        transform: translate(0, -150%);
         display: none; 
         position: fixed;
         bottom: 20px;
