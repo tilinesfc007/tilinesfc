@@ -524,3 +524,33 @@ function toggleGameButton() {
 
 window.addEventListener('load', toggleGameButton);
 window.addEventListener('resize', toggleGameButton);
+  const versionsModal = document.getElementById('versionsModal');
+        const closeVersionsModal = document.getElementById('closeVersionsModal');
+        const openVersionsModal = document.getElementById('openVersionsModal');
+
+        // Abrir modal al hacer clic en "Descargar" en la tarjeta de Versión Oficial
+        openVersionsModal.addEventListener('click', function(e) {
+            e.preventDefault();
+            versionsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Cerrar modal
+        closeVersionsModal.addEventListener('click', function() {
+            versionsModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        versionsModal.addEventListener('click', function(e) {
+            if (e.target === versionsModal) {
+                versionsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && versionsModal.classList.contains('active')) {
+                versionsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
