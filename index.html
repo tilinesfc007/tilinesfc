@@ -114,6 +114,133 @@
         top: -15px;
     }
 }
+
+/* Estilos para el modal de optimización */
+.optimization-steps {
+    margin: 20px 0;
+}
+
+.step {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 107, 0, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #FF6B00;
+}
+
+.step-number {
+    font-weight: bold;
+    color: #FF6B00;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.step-content {
+    margin-top: 10px;
+}
+
+.code-block {
+    background: #222;
+    color: #f8f8f2;
+    padding: 12px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    margin: 10px 0;
+    overflow-x: auto;
+}
+
+.copy-btn {
+    background: #FF6B00;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.copy-btn:hover {
+    background: #e05d00;
+}
+
+.download-btn {
+    display: inline-block;
+    background: #FF6B00;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.download-btn i {
+    margin-right: 5px;
+}
+
+.download-btn:hover {
+    background: #e05d00;
+}
+
+.tip {
+    font-style: italic;
+    color: #aaa;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Modal de optimización */
+#optimizationModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#optimizationModal .modal-container {
+    background-color: #111;
+    border: 2px solid #FF6B00;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+    position: relative;
+}
+
+#optimizationModal .modal-title {
+    color: #FF6B00;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+#optimizationModal .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#optimizationModal .modal-footer {
+    margin-top: 20px;
+    text-align: center;
+}
     </style>
 </head>
 
@@ -239,7 +366,7 @@
                         <div class="countdown-date">10 DE SEPTIEMBRE 2025</div>
                     </div>
                     
-                    <a href="#" class="read-more">Más información| Filtraciones mes Agosto<i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="read-more">Más información| Filtaciones (AGOSTO) <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
@@ -251,8 +378,20 @@
                 </div>
                 <div class="post-content">
                     <h3><i class="fa-solid fa-gamepad"></i> Versión Oficial</h3>
-                    <p>Descubre lo nuevo del juego que trae PUBG.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.tencent.ig&pcampaignid=web_share" class="read-more">Descargar <i class="fas fa-arrow-right"></i></a>
+                    <p>Descubre lo nuevo que trae PUBG y Otras Versiones del Juego.</p>
+                    <a href="#" class="read-more" id="openVersionsModal">Descargar <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="post-card">
+                <button class="like-btn" data-post-id="4"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="4">0</div>
+                <div class="post-img">
+                    <img src="./img/opti.jpg" alt="Optimizar Juego">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fas fa-tachometer-alt"></i> Optimizar Juego</h3>
+                    <p>Guía completa para optimizar PUBG Mobile y mejorar el rendimiento en tu dispositivo.</p>
+                    <a href="./index-guia.html" class="read-more" id="openOptimizationModal">Ver Guía <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -535,7 +674,6 @@
                     <img src="./img-temp/2-4.jpg" alt="Filtración 7">
                     <div class="gallery-caption">AUG MEJORABLE (AGOSTO)</div>
                 </div>
-                <!-- Imágenes originales del modal -->
                 <div class="gallery-item" data-index="7">
                     <img src="./img-temp/newmap.png" alt="Nueva Temporada">
                     <div class="gallery-caption">Mapa "RONDO"</div>
@@ -585,6 +723,7 @@
         </div>
     </div>
 </div>
+
 <button id="openGameBtn">
     <i class="fas fa-gamepad"></i>
 </button>
@@ -624,6 +763,48 @@
     </div>
 </div>
 
+     <div class="modal-overlay" id="versionsModal">
+        <div class="modal-container">
+            <button class="modal-close" id="closeVersionsModal">&times;</button>
+            <h3 class="modal-title">Versiones Disponibles</h3>
+            
+            <div class="versions-grid">
+                <div class="version-card">
+                    <div class="version-img">
+                        <img src="./img/oficial.jpg" alt="Versión Global">
+                    </div>
+                    <div class="version-content">
+                        <h4>Versión Global</h4>
+                        <p>Versión estándar para la mayoría de regiones</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.tencent.ig" class="version-btn" target="_blank">Descargar</a>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-img">
+                        <img src="./img-temp/kr.jpg" alt="Versión KR">
+                    </div>
+                    <div class="version-content">
+                        <h4>Versión KR (Corea)</h4>
+                        <p>Versión especial para Corea del Sur</p>
+                        <a href="https://www.mediafire.com/file/7x76xebod8233e2/PUBG_Mobile_3.9.0_Kr.apk/file" class="version-btn" target="_blank">Descargar</a>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-img">
+                        <img src="./img-temp/bgmi.webp" alt="Versión India">
+                    </div>
+                    <div class="version-content">
+                        <h4>Versión India (BGMI)</h4>
+                        <p>Versión especial para el mercado indio (Archivo XAPK)</p>
+                        <a href="https://www.mediafire.com/file/zcb7oy04bui73v3/Pubg_BGMI_tilines_fc.xapk/file" class="version-btn" target="_blank">Descargar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-logo">TILINES FC</div>
@@ -647,15 +828,5 @@
     </div>
     
     <script src="./script.js"></script>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XSSLLH5TQ1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XSSLLH5TQ1');
-</script>
 </body>
 </html>
