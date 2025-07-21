@@ -241,6 +241,85 @@
     margin-top: 20px;
     text-align: center;
 }
+         .hero-social {
+            display: flex;
+            gap: 12px;
+            margin-left: 20px;
+            align-items: center;
+        }
+
+        .social-icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 107, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF6B00;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 0, 0.5);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .social-icon-btn:hover {
+            background: #FF6B00;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.4);
+        }
+
+        .social-icon-btn i {
+            font-size: 18px;
+        }
+
+        /* Versión móvil - Grid 4x4 */
+        @media (max-width: 768px) {
+            .hero-social {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                width: 100%;
+                margin: 20px 0 0 0;
+                justify-items: center;
+            }
+
+            .social-icon-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-icon-btn i {
+                font-size: 22px;
+            }
+
+            .hero-content .cta-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        /* Efecto de mira láser */
+        @keyframes laser {
+            0% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 107, 0, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.5); }
+        }
+
+        .social-icon-btn:hover {
+            animation: laser 0.5s infinite alternate;
+        }
+
+        /* Contenedor flexible para botón e iconos */
+        .cta-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 
@@ -298,6 +377,27 @@
             <p>Pagina dedicada a seguimiento del juego subiendo beta, version oficial (sino a salido en la tiendas de apps) y novedades de temporada.</p>
             <a href="https://t.me/+wei9FKSQL7UyMDVh" class="cta-button">ÚNETE AHORA <i class="fas fa-chevron-right"></i></a>
         </div>
+        <div class="cta-container">
+                <a href="https://t.me/+wei9FKSQL7UyMDVh" class="cta-button">ÚNETE AHORA <i class="fas fa-chevron-right"></i></a>
+                
+                <div class="hero-social">
+                    <a href="https://t.me/+wei9FKSQL7UyMDVh" class="social-icon-btn" target="_blank" title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://discord.gg/zKX5nAS5" class="social-icon-btn" target="_blank" title="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://www.instagram.com/tilines_fcf?igsh=MXc3M2Q0dDk1NW5nOQ==" class="social-icon-btn" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029Vb6cxh02kNFqdWRnDs3v" class="social-icon-btn" target="_blank" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61578581550500" class="social-icon-btn" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
         
         <div class="slider">
             <div class="slider-nav">
