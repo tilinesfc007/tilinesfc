@@ -554,3 +554,16 @@ window.addEventListener('resize', toggleGameButton);
                 document.body.style.overflow = '';
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialIcons = document.querySelectorAll('.social-icon-btn');
+            
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2) rotate(10deg)';
+                });
+                icon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0)';
+                });
+            });
+        });
