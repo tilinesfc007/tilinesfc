@@ -84,11 +84,29 @@
     background-color: #111;
 }
 
-.gallery-item img {
+.gallery-item {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Cambiado a 'contain' para ver imágenes completas */
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.gallery-item.active {
+    display: block;
+}
+
+.gallery-item img, .gallery-item video {
+    width: 100%;
+    height: calc(100% - 40px); /* Restamos espacio para el caption */
+    object-fit: contain;
     background-color: #000;
+}
+
+.gallery-item video {
+    background-color: #000;
+    display: block;
 }
 
 .gallery-caption {
@@ -101,6 +119,10 @@
     padding: 8px;
     text-align: center;
     font-size: 0.9rem;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Ajustes para móviles */
@@ -375,8 +397,7 @@
                 <span>TILINES</span>
             </div>
             <p>Pagina dedicada a seguimiento del juego subiendo beta, version oficial (sino a salido en la tiendas de apps) y novedades de temporada.</p>
-            
-            <div class="cta-container">
+                    <div class="cta-container">
                 <a href="https://t.me/+wei9FKSQL7UyMDVh" class="cta-button">ÚNETE AHORA <i class="fas fa-chevron-right"></i></a>
                 
                 <div class="hero-social">
@@ -404,9 +425,9 @@
                 <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
+            <img src="./filtraciones/portada.jpg" alt="Slider 1" class="active">
             <img src="./img-temp/filtadoss.jpg" alt="Slider 4">
             <img src="./img-temp/filtrados.jpg" alt="Slider 5">
-            <img src="./img/akmman.jpg" alt="Slider 1" class="active">
             <img src="./img/pochi.jpg" alt="Slider 2">
             <img src="./img/s12k.jpg" alt="Slider 3">
         </div>
@@ -466,7 +487,7 @@
                         <div class="countdown-date">10 DE SEPTIEMBRE 2025</div>
                     </div>
                     
-                    <a href="#" class="read-more">Más información| Filtaciones (AGOSTO) <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="read-more" id="openSeasonModal">Más información| Filtaciones (AGOSTO) <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
@@ -775,19 +796,66 @@
                     <div class="gallery-caption">AUG MEJORABLE (AGOSTO)</div>
                 </div>
                 <div class="gallery-item" data-index="7">
-                    <img src="./img-temp/newmap.png" alt="Nueva Temporada">
-                    <div class="gallery-caption">Mapa "RONDO"</div>
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/bote.jpg" alt="Filtración 8">
+                    <div class="gallery-caption">BOTE MEJORABLE (AGOSTO 15)</div>
                 </div>
                 <div class="gallery-item" data-index="8">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/bote_traje.jpg" alt="Filtración 9">
+                    <div class="gallery-caption">TRAJE BONUS</div>
+                </div>
+                <div class="gallery-item" data-index="9">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/m2.jpg" alt="Filtración 7">
+                    <div class="gallery-caption">M2 MEJORABLE</div>
+                </div>
+                <div class="gallery-item" data-index="10">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/mk14.jpg" alt="Filtración 7">
+                    <div class="gallery-caption">MK MEJORABLE</div>
+                </div>
+                <div class="gallery-item" data-index="11">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/mochila.jpg" alt="Filtración 7">
+                    <div class="gallery-caption">MOCHILA (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="12">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <video controls>
+                        <source src="./filtraciones/FILTRACION.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <div class="gallery-caption">SET CUDDLY (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="13">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <video controls>
+                        <source src="./filtraciones/FILTRACION2.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <div class="gallery-caption">M249 PREDATOR PROTOCOL(AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="14">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/traje_mk.jpg" alt="Filtración 7">
+                    <div class="gallery-caption">TRAJECUDDLY (AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="15">
+                    <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                    <img src="./filtraciones/varios.jpg" alt="Filtración 7">
+                    <div class="gallery-caption">VARIOS(AGOSTO)</div>
+                </div>
+                <div class="gallery-item" data-index="16">
                     <img src="./img-temp/nuevaarm.webp" alt="Nuevas Armas">
                     <div class="gallery-caption">Nueva Arma ASM ABAKAN</div>
                 </div>
-                <div class="gallery-item" data-index="9">
+                <div class="gallery-item" data-index="17">
                     <img src="./img-temp/colab.avif" alt="Colaboraciones">
                     <div class="gallery-caption">COLABORACION TRANSFORMERS</div>
                 </div>
             </div>
-            
+            <p>Puedes parar la Foto Preionando la Imagen</p>
             <div class="gallery-nav">
                 <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
@@ -926,7 +994,97 @@
         <button class="page-like-btn" id="pageLikeBtn"><i class="far fa-heart"></i></button>
         <div class="page-like-count" id="pageLikeCount">0</div>
     </div>
-    <script id="chatBroEmbedCode">/* Chatbro Widget Embed Code Start */function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:'undefined'==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error('Chatbro loading error')},xhr.open('GET','https://www.chatbro.com/embed.js?'+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}/* Chatbro Widget Embed Code End */ChatbroLoader({encodedChatId: '797Rc'});</script>
     <script src="./script.js"></script>
+    <script>
+        // Script para manejar la galería de imágenes/videos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Abrir modal de temporada
+            const openSeasonModal = document.getElementById('openSeasonModal');
+            const seasonModal = document.getElementById('seasonModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            if(openSeasonModal && seasonModal && closeModal) {
+                openSeasonModal.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    seasonModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Inicializar la galería
+                    initGallery();
+                });
+                
+                closeModal.addEventListener('click', function() {
+                    seasonModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Pausar todos los videos al cerrar el modal
+                    const videos = document.querySelectorAll('.gallery-item video');
+                    videos.forEach(video => {
+                        video.pause();
+                    });
+                });
+            }
+            
+            // Función para inicializar la galería
+            function initGallery() {
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                const prevBtn = document.querySelector('.gallery-prev');
+                const nextBtn = document.querySelector('.gallery-next');
+                let currentIndex = 0;
+                
+                // Mostrar el primer elemento
+                showItem(currentIndex);
+                
+                // Event listeners para los botones de navegación
+                if(prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', function() {
+                        navigate(-1);
+                    });
+                    
+                    nextBtn.addEventListener('click', function() {
+                        navigate(1);
+                    });
+                }
+                
+                // Función para navegar entre elementos
+                function navigate(direction) {
+                    // Pausar el video actual antes de cambiar
+                    const currentVideo = galleryItems[currentIndex].querySelector('video');
+                    if(currentVideo) {
+                        currentVideo.pause();
+                    }
+                    
+                    currentIndex += direction;
+                    
+                    // Asegurarse de que el índice esté dentro de los límites
+                    if(currentIndex < 0) {
+                        currentIndex = galleryItems.length - 1;
+                    } else if(currentIndex >= galleryItems.length) {
+                        currentIndex = 0;
+                    }
+                    
+                    showItem(currentIndex);
+                }
+                
+                // Función para mostrar un elemento específico
+                function showItem(index) {
+                    // Ocultar todos los elementos
+                    galleryItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Mostrar el elemento actual
+                    galleryItems[index].classList.add('active');
+                    
+                    // Reproducir automáticamente si es un video
+                    const video = galleryItems[index].querySelector('video');
+                    if(video) {
+                        video.currentTime = 0;
+                        video.play().catch(e => console.log('Autoplay prevented:', e));
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
