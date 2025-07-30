@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TILINES FC</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/icono.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/icono.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/icono.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="mask-icon" href="./img/icono.png" color="#ff6b00">
+    <meta name="msapplication-TileColor" content="#ff6b00">
+    <meta name="theme-color" content="#000000">
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos para el preloader con logo centrado */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .preloader-logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        
+        .loader {
+            border: 5px solid #333;
+            border-top: 5px solid #FF6B00;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .preloader p {
+            color: #FF6B00;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .season-gallery-container {
+            margin-bottom: 2rem;
+        }
+
+        .gallery-title {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            background: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .season-gallery {
+            height: 250px; 
+        }
+
+        @media (max-width: 768px) {
+            .season-gallery {
+                height: 180px;
+            }
+            
+            .gallery-title {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Estilos para el modal de temporada */
+        .modal-container {
+            max-width: 800px; /* Aumentamos un poco el ancho */
+        }
+
+        .season-gallery-container {
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .gallery-title {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.7);
+            padding: 0.5rem;
+            border-radius: 5px;
+            display: inline-block;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            border: 1px solid var(--primary);
+        }
+
+        .season-gallery {
+            height: 350px; /* Aumentamos la altura */
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background-color: #111;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .gallery-item.active {
+            display: block;
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: calc(100% - 40px); /* Restamos espacio para el caption */
+            object-fit: contain;
+            background-color: #000;
+        }
+
+        .gallery-item video {
+            background-color: #000;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 768px) {
+            .season-gallery {
+                height: 250px;
+            }
+            
+            .gallery-title {
+                font-size: 1rem;
+                top: -15px;
+            }
+        }
+
+        /* Estilos para el modal de optimización */
+        .optimization-steps {
+            margin: 20px 0;
+        }
+
+        .step {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 107, 0, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #FF6B00;
+        }
+
+        .step-number {
+            font-weight: bold;
+            color: #FF6B00;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .step-content {
+            margin-top: 10px;
+        }
+
+        .code-block {
+            background: #222;
+            color: #f8f8f2;
+            padding: 12px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .copy-btn {
+            background: #FF6B00;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #e05d00;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #FF6B00;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .download-btn i {
+            margin-right: 5px;
+        }
+
+        .download-btn:hover {
+            background: #e05d00;
+        }
+
+        .tip {
+            font-style: italic;
+            color: #aaa;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* Modal de optimización */
+        #optimizationModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #optimizationModal .modal-container {
+            background-color: #111;
+            border: 2px solid #FF6B00;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        #optimizationModal .modal-title {
+            color: #FF6B00;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        #optimizationModal .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #optimizationModal .modal-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .hero-social {
+            display: flex;
+            gap: 12px;
+            margin-left: 20px;
+            align-items: center;
+        }
+
+        .social-icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 107, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF6B00;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 0, 0.5);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .social-icon-btn:hover {
+            background: #FF6B00;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.4);
+        }
+
+        .social-icon-btn i {
+            font-size: 18px;
+        }
+
+        /* Versión móvil - Grid 4x4 */
+        @media (max-width: 768px) {
+            .hero-social {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                width: 100%;
+                margin: 20px 0 0 0;
+                justify-items: center;
+            }
+
+            .social-icon-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-icon-btn i {
+                font-size: 22px;
+            }
+
+            .hero-content .cta-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        /* Efecto de mira láser */
+        @keyframes laser {
+            0% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 107, 0, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.5); }
+        }
+
+        .social-icon-btn:hover {
+            animation: laser 0.5s infinite alternate;
+        }
+
+        /* Contenedor flexible para botón e iconos */
+        .cta-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-container {
+            background-color: #111;
+            border: 2px solid #FF6B00;
+            border-radius: 8px;
+            max-width: 95%;
+            width: 100%;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-title {
+            color: #FF6B00;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+            padding: 0 20px;
+        }
+
+        /* Galería mejorada */
+        .season-gallery-container {
+            margin: 0 auto;
+            position: relative;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .season-gallery {
+            height: 60vh;
+            min-height: 300px;
+            max-height: 600px;
+            border: 2px solid #FF6B00;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            background-color: #000;
+        }
+
+        .gallery-item.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-item img, 
+        .gallery-item video {
+            max-width: 100%;
+            max-height: calc(100% - 50px);
+            object-fit: contain;
+            background-color: #000;
+            display: block;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: auto;
+            max-height: calc(100% - 50px);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #333;
+        }
+
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 15px;
+        }
+
+        .gallery-prev, 
+        .gallery-next {
+            background: #FF6B00;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-indicators {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .gallery-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-indicator.active {
+            background: #FF6B00;
+            transform: scale(1.2);
+        }
+
+        /* Contenido adicional del modal */
+        .novedades-list {
+            list-style: none;
+            padding: 0 20px;
+            margin: 20px 0;
+        }
+
+        .novedades-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .novedades-list li i {
+            color: #FF6B00;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+
+        .novedades-list li h4 {
+            color: #FF6B00;
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+        }
+
+        .novedades-list li p {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .modal-footer {
+            text-align: center;
+            padding: 0 20px 20px;
+        }
+
+        /* Responsive para la ventana emergente */
+        @media (max-width: 768px) {
+            .season-gallery {
+                height: 50vh;
+                min-height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .season-gallery {
+                height: 40vh;
+                min-height: 200px;
+            }
+            
+            .gallery-caption {
+                font-size: 0.8rem;
+                height: 40px;
+                padding: 5px;
+            }
+        }
+        
+.notification-bell {
+    position: relative;
+    cursor: pointer;
+    margin-left: 20px;
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.notification-bell:hover {
+    color: #FF6B00;
+    transform: scale(1.1);
+}
+
+.notification-dot {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 10px;
+    height: 10px;
+    background-color: #FF6B00;
+    border-radius: 50%;
+    border: 2px solid #111;
+}
+
+.notification-container {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 300px;
+    background-color: #111;
+    border: 2px solid #FF6B00;
+    border-radius: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.notification-header {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-header h4 {
+    color: #FF6B00;
+    margin: 0;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.notification-item {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.notification-item:hover {
+    background-color: rgba(255, 107, 0, 0.1);
+}
+
+.notification-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 1px solid #FF6B00;
+}
+
+.notification-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-content h5 {
+    margin: 0 0 5px 0;
+    color: white;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.notification-time {
+    color: #666;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.notification-footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.notification-footer a {
+    color: #FF6B00;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.notification-footer a:hover {
+    text-decoration: underline;
+}
+    @keyframes bell-ring {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+    30% { transform: rotate(10deg); }
+    40% { transform: rotate(-10deg); }
+    50% { transform: rotate(5deg); }
+    60% { transform: rotate(-5deg); }
+    70% { transform: rotate(2deg); }
+    80% { transform: rotate(-2deg); }
+    90% { transform: rotate(1deg); }
+    100% { transform: rotate(0); }
+}
+
+.notification-bell.new-notification {
+    animation: bell-ring 1s ease;
+}
+
+.notification-bell.new-notification .notification-dot {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+    </style>
+</head>
+
+<body>
+    
+    <!-- Preloader con logo centrado -->
+    <div class="preloader">
+        <img src="./img/icono.png" alt="Logo TILINES FC" class="preloader-logo">
+        <div class="loader"></div>
+        <p>Cargando TILINES FC...</p>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-img">
+                <img src="./img/icono.png" alt="Logo TILINES FC">
+            </div>
+            <h1>TILINES <span>FC</span></h1>
+        </div>
+        
+        <nav>
+            <ul id="menu">
+                <li><a href="#publicaciones"><i class="fas fa-newspaper"></i> PUBLICACIONES</a></li>
+                <li><a href="#nosotros"><i class="fas fa-users"></i> NOSOTROS</a></li>
+                <li><a href="#clan"><i class="fas fa-shield-alt"></i> CLAN</a></li>
+                <li><a href="#redes"><i class="fas fa-share-alt"></i> REDES</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <!-- Campana de notificaciones -->
+<div class="notification-bell" id="notificationBell">
+    <i class="fas fa-bell"></i>
+    <div class="notification-dot"></div>
+</div>
+
+<!-- Contenedor de notificaciones -->
+<div class="notification-container" id="notificationContainer">
+    <div class="notification-header">
+        <h4>Notificaciones</h4>
+        <button class="notification-close" id="notificationClose">&times;</button>
+    </div>
+    
+    <a href="./beta.html" class="notification-item">
+        <div class="notification-img">
+            <img src="./img/beta.jpg" alt="Beta se acerca">
+        </div>
+        <div class="notification-content">
+            <h5>¡Beta se acerca!</h5>
+            <p>Prueba las nuevas funciones antes que nadie</p>
+            <div class="notification-time">Hace 1 hora</div>
+        </div>
+    </a>
+    
+    <div class="notification-footer">
+        <a href="#">Ver todas las notificaciones</a>
+    </div>
+</div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="falling-icon" style="left: 10%; animation-delay: 0s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        <div class="falling-icon" style="left: 30%; animation-delay: 2s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        <div class="falling-icon" style="left: 70%; animation-delay: 4s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        <div class="falling-icon" style="left: 90%; animation-delay: 6s;">
+            <img src="./img/casco.png" alt="PUBG Helmet" width="30">
+        </div>
+        
+        <div class="hero-content">
+            <h2>Bienvenidos <br>Somos...</h2>
+            <div class="changing-words">
+                <span>EQUIPO</span>
+                <span>HERMANOS</span>
+                <span>TILINES</span>
+            </div>
+            <p>Pagina dedicada a seguimiento del juego subiendo beta, version oficial (sino a salido en la tiendas de apps) y novedades de temporada.</p>
+                    <div class="cta-container">
+                <a href="https://t.me/+wei9FKSQL7UyMDVh" class="cta-button">ÚNETE AHORA <i class="fas fa-chevron-right"></i></a>
+                
+                <div class="hero-social">
+                    <a href="https://t.me/+wei9FKSQL7UyMDVh" class="social-icon-btn" target="_blank" title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://discord.gg/zKX5nAS5" class="social-icon-btn" target="_blank" title="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://www.instagram.com/tilines_fcf?igsh=MXc3M2Q0dDk1NW5nOQ==" class="social-icon-btn" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029Vb6cxh02kNFqdWRnDs3v" class="social-icon-btn" target="_blank" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61578581550500" class="social-icon-btn" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider">
+            <div class="slider-nav">
+                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <img src="./filtraciones/portada.jpg" alt="Slider 1" class="active">
+            <img src="./img-temp/filtadoss.jpg" alt="Slider 4">
+            <img src="./img-temp/filtrados.jpg" alt="Slider 5">
+            <img src="./img/pochi.jpg" alt="Slider 2">
+            <img src="./img/s12k.jpg" alt="Slider 3">
+        </div>
+    </section>
+    
+    <!-- Publicaciones -->
+    <section class="publicaciones" id="publicaciones">
+        <div class="section-title">
+            <h2>PUBLICACIONES</h2>
+        </div>
+        
+        <div class="posts-grid">
+            <div class="post-card">
+                <button class="like-btn" data-post-id="1"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="1">0</div>
+                <div class="post-img">
+                    <img src="./img/beta.jpg" alt="beta_game">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fas fa-trophy"></i> BETA DEL JUEGO</h3>
+                    <p>Beta del juego para probar la jugabilidad que se implementara, pruebalo antes que todos.</p>
+                    <a href="./beta.html" class="read-more">Probar <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <button class="like-btn" data-post-id="2"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="2">0</div>
+                <div class="post-img">
+                    <img src="./img/tempo.webp" alt="Nueva Temporada">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fas fa-calendar-alt"></i> Nueva Temporada</h3>
+                    <p>¡Prepárate para la nueva temporada con emocionantes novedades y desafíos!</p>
+                    
+                    <!-- Contador regresivo -->
+                    <div class="countdown-container">
+                        <div class="countdown-title">TERMINA EN:</div>
+                        <div class="countdown" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">DÍAS</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">HORAS</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">MIN</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">SEG</span>
+                            </div>
+                        </div>
+                        <div class="countdown-date">10 DE SEPTIEMBRE 2025</div>
+                    </div>
+                    
+                    <a href="#" class="read-more" id="openSeasonModal">Más información| Filtaciones (AGOSTO) <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <button class="like-btn" data-post-id="3"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="3">0</div>
+                <div class="post-img">
+                    <img src="./img/oficial.jpg" alt="oficial_game">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fa-solid fa-gamepad"></i> Versión Oficial</h3>
+                    <p>Descubre lo nuevo que trae PUBG y Otras Versiones del Juego.</p>
+                    <a href="#" class="read-more" id="openVersionsModal">Descargar <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="post-card">
+                <button class="like-btn" data-post-id="4"><i class="far fa-heart"></i></button>
+                <div class="like-count" data-post-id="4">0</div>
+                <div class="post-img">
+                    <img src="./img/opti.jpg" alt="Optimizar Juego">
+                </div>
+                <div class="post-content">
+                    <h3><i class="fas fa-tachometer-alt"></i> Optimizar Juego</h3>
+                    <p>Guía completa para optimizar PUBG Mobile y mejorar el rendimiento en tu dispositivo.</p>
+                    <a href="./index-guia.html" class="read-more" id="openOptimizationModal">Ver Guía <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Nosotros -->
+    <section id="nosotros">
+        <div class="section-title">
+            <h2>NOSOTROS</h2>
+        </div>
+        
+        <div class="team">
+            <!-- Miembro 1 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 10%; animation-delay: 0s;">
+                    <img src="./img/roda.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 30%; animation-delay: 3s;">
+                    <img src="./img/roda.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 70%; animation-delay: 6s;">
+                    <img src="./img/roda.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/1.png" alt="Miembro 1">
+                </div>
+                <div class="member-info">
+                    <h3>Líder TILIN</h3>
+                    <p>Fundador & Líder</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 2 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 20%; animation-delay: 5s;">
+                    <img src="./img/m4fe.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 50%; animation-delay: 4s;">
+                    <img src="./img/m4fe.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 80%; animation-delay: 7s;">
+                    <img src="./img/m4fe.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/2.png" alt="Miembro 2">
+                </div>
+                <div class="member-info">
+                    <h3>Co-TILIN</h3>
+                    <p>Estrategia & Tácticas</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 3 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 15%; animation-delay: 2s;">
+                    <img src="./img/fran.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 45%; animation-delay: 5s;">
+                    <img src="./img/fran.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 75%; animation-delay: 8s;">
+                    <img src="./img/fran.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/3.png" alt="Miembro 3">
+                </div>
+                <div class="member-info">
+                    <h3>Francotirador</h3>
+                    <p>Especialista en larga distancia</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 4 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 5%; animation-delay: 1.5s;">
+                    <img src="./img/piti.ico" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 35%; animation-delay: 4.5s;">
+                    <img src="./img/piti.ico" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 65%; animation-delay: 7.5s;">
+                    <img src="./img/piti.ico" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/4.png" alt="Miembro 4">
+                </div>
+                <div class="member-info">
+                    <h3>Asalto</h3>
+                    <p>Combate cercano</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 5 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 25%; animation-delay: 1.5s;">
+                    <img src="./img/s12kke.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 55%; animation-delay: 4.5s;">
+                    <img src="./img/s12kke.png" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 85%; animation-delay: 7.5s;">
+                    <img src="./img/s12kke.png" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/6.png" alt="Miembro 5">
+                </div>
+                <div class="member-info">
+                    <h3>Soporte</h3>
+                    <p>Suministros y apoyo</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 6 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 10%; animation-delay: 2.5s;">
+                    <img src="./img/akmman.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 40%; animation-delay: 5.5s;">
+                    <img src="./img/akmman.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 70%; animation-delay: 8.5s;">
+                    <img src="./img/akmman.jpg" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/7.png" alt="Miembro 6">
+                </div>
+                <div class="member-info">
+                    <h3>Conductor</h3>
+                    <p>Movilidad y transporte</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 7 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 15%; animation-delay: 0.7s;">
+                    <img src="./img/pochi.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 45%; animation-delay: 3.7s;">
+                    <img src="./img/pochi.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 75%; animation-delay: 6.7s;">
+                    <img src="./img/pochi.jpg" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/5.png" alt="Miembro 7">
+                </div>
+                <div class="member-info">
+                    <h3>Scout</h3>
+                    <p>Reconocimiento</p>
+                </div>
+            </div>
+            
+            <!-- Miembro 8 -->
+            <div class="member-card">
+                <div class="card-falling-icon" style="left: 20%; animation-delay: 1.7s;">
+                    <img src="./img/s12k.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 50%; animation-delay: 4.7s;">
+                    <img src="./img/s12k.jpg" alt="Icon" width="30">
+                </div>
+                <div class="card-falling-icon" style="left: 80%; animation-delay: 7.7s;">
+                    <img src="./img/s12k.jpg" alt="Icon" width="30">
+                </div>
+                
+                <div class="member-img">
+                    <img src="./img/user.png" alt="Miembro 8">
+                </div>
+                <div class="member-info">
+                    <h3>Comunicaciones</h3>
+                    <p>Coordinación de equipo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Clan y Redes -->
+    <section class="clan-section" id="clan">
+        <div class="section-title">
+            <h2>CLAN</h2>
+        </div>
+        
+        <div class="clan-info">
+            <p>TILINES FC es un clan dentro del juego, jugadores que comparten la pasión por PUBG MOBILE y los videojuegos. Nos destacamos por nuestro trabajo en equipo, comunicación y sobre todo, por el ambiente de amistad que mantenemos.</p>
+            <p>Compartimos versiones, noticias del juego y buscar equipos para jugar</p>
+        </div>
+        
+        <a href="#" class="cta-button"><i class="fab fa-telegram"></i> UNIRSE AL GRUPO DE TELEGRAM</a>
+    </section>
+    
+    <section id="redes">
+        <div class="section-title">
+            <h2>REDES SOCIALES</h2>
+        </div>
+        
+        <div class="social-container">
+            <div class="social-box">
+                <i class="fab fa-telegram"></i>
+                <h3>Telegram</h3>
+                <p>Únete a nuestro grupo principal de comunicación</p>
+                <a href="https://t.me/+wei9FKSQL7UyMDVh">Unirse <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="social-box">
+                <i class="fab fa-discord"></i>
+                <h3>Discord</h3>
+                <p>Canales de voz para jugar y charlar</p>
+                <a href="https://discord.gg/zKX5nAS5">Unirse<i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="social-box">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>Síguenos para ver nuestros highlights</p>
+                <a href="https://www.instagram.com/tilines_fcf?igsh=MXc3M2Q0dDk1NW5nOQ==">Seguir<i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="social-box">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p>Nuestro Canal de WhatsApp.</p>
+                <a href="https://whatsapp.com/channel/0029Vb6cxh02kNFqdWRnDs3v">Unirse <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+             <div class="social-box">
+                <i class="fab fa-facebook"></i>
+                <h3>Facebook</h3>
+                <p>Síguenos en nuestra pagina oficial</p>
+                <a href="https://www.facebook.com/profile.php?id=61578581550500">Seguir <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal de Nueva Temporada -->
+    <div class="modal-overlay" id="seasonModal">
+        <div class="modal-container">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h3 class="modal-title">Novedades de la Temporada</h3>
+            
+            <div class="season-gallery-container">
+                <div class="season-gallery">
+                    <div class="gallery-item active" data-index="0">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/1-1.jpg" alt="Filtración 1">
+                        <div class="gallery-caption">Nuevo X-Suit "DRAVION" (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="1">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/1-2.jpg" alt="Filtración 2">
+                        <div class="gallery-caption">Skin Mejorable AWM (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="2">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/1-3.jpg" alt="Filtración 3">
+                        <div class="gallery-caption">NUEVOS EMOTES X-SUIT (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="3">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/2-1.jpg" alt="Filtración 4">
+                        <div class="gallery-caption">PRIMER SET ULTIMATE</div>
+                    </div>
+                    <div class="gallery-item" data-index="4">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/2-2.jpg" alt="Filtración 5">
+                        <div class="gallery-caption">Segundo SET ULTIMATE (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="5">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/2-3.jpg" alt="Filtración 6">
+                        <div class="gallery-caption">PRIMERA SKIN MEJORABLE "DSR" (Lanzada)</div>
+                    </div>
+                    <div class="gallery-item" data-index="6">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./img-temp/2-4.jpg" alt="Filtración 7">
+                        <div class="gallery-caption">AUG MEJORABLE (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="7">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/bote.jpg" alt="Filtración 8">
+                        <div class="gallery-caption">BOTE MEJORABLE (AGOSTO 15)</div>
+                    </div>
+                    <div class="gallery-item" data-index="8">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/bote_traje.jpg" alt="Filtración 9">
+                        <div class="gallery-caption">TRAJE BONUS</div>
+                    </div>
+                    <div class="gallery-item" data-index="9">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/m2.jpg" alt="Filtración 7">
+                        <div class="gallery-caption">M2 MEJORABLE</div>
+                    </div>
+                    <div class="gallery-item" data-index="10">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/mk14.jpg" alt="Filtración 7">
+                        <div class="gallery-caption">MK MEJORABLE</div>
+                    </div>
+                    <div class="gallery-item" data-index="11">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/mochila.jpg" alt="Filtración 7">
+                        <div class="gallery-caption">MOCHILA (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="12">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <video controls>
+                            <source src="./filtraciones/FILTRACION.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                        <div class="gallery-caption">SET CUDDLY (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="13">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <video controls>
+                            <source src="./filtraciones/FILTRACION2.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                        <div class="gallery-caption">M249 PREDATOR PROTOCOL(AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="14">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/traje_mk.jpg" alt="Filtración 7">
+                        <div class="gallery-caption">TRAJECUDDLY (AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="15">
+                        <h4 class="gallery-title">FILTRACIONES EXCLUSIVAS</h4>
+                        <img src="./filtraciones/varios.jpg" alt="Filtración 7">
+                        <div class="gallery-caption">VARIOS(AGOSTO)</div>
+                    </div>
+                    <div class="gallery-item" data-index="16">
+                        <img src="./img-temp/nuevaarm.webp" alt="Nuevas Armas">
+                        <div class="gallery-caption">Nueva Arma ASM ABAKAN</div>
+                    </div>
+                    <div class="gallery-item" data-index="17">
+                        <img src="./img-temp/colab.avif" alt="Colaboraciones">
+                        <div class="gallery-caption">COLABORACION TRANSFORMERS</div>
+                    </div>
+                </div>
+                <p>Puedes parar la Foto Presionando el Nombre de la Imagen o Video</p>
+                <div class="gallery-nav">
+                    <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <ul class="novedades-list">
+                <li>
+                    <i class="fas fa-map-marked-alt"></i>
+                    <div>
+                        <h4>Nuevo Mapa "RONDO"</h4>
+                        <p>Un mapa citadino, perfecto para combates a corta y media distancia.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-gun"></i>
+                    <div>
+                        <h4>Nueva Arma: ASM ABAKAN</h4>
+                        <p>Mejor arma de .5cmm para media distancia popular en esta temporada.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-vest"></i>
+                    <div>
+                        <h4>COLABORACION TRANSFORMERS</h4>
+                        <p>Disfruta de unas de las mejores colaboraciones de PUBG MOBILE. (Finaliza <strong style="color: blue;">Prize</strong> <strong style="color: red;">Path</strong> 02 septiembre 2025)</p>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="modal-footer">
+                <a href="https://youtu.be/xvFZjo5PgG0" class="cta-button">VER TRAILER <i class="fas fa-play"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <button id="openGameBtn" title="Juegos TILINES">
+        <i class="fas fa-gamepad"></i>
+    </button>
+    
+    <div id="gameContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; font-family: 'Press Start 2P', cursive; color: white;">
+        <div id="gameHeader" style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #FF6B00;">PRESIONA LOS PUNTOS NARANJAS</h2>
+            <div id="timer" style="font-size: 24px; margin: 10px 0;">30</div>
+            <div id="scoreDisplay" style="font-size: 20px;">Puntos: 0</div>
+        </div>
+        
+        <div id="gameArea" style="position: relative; width: 90%; max-width: 500px; height: 60vh; max-height: 500px; background-color: rgba(255,255,255,0.1); border: 2px solid #FF6B00; border-radius: 10px; overflow: hidden;">
+       
+        </div>
+        
+        <div id="gameControls" style="margin-top: 20px; display: flex; gap: 10px;">
+            <button id="restartGameBtn" style="background-color: #FF6B00; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 12px;">REINICIAR</button>
+            <button id="closeGameBtn" style="background-color: #333; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 12px;">CERRAR</button>
+        </div>
+        
+
+        <button id="modalTriggerBtn" style="display: none; margin-top: 20px; background-color: #FF6B00; color: white; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 14px; box-shadow: 0 0 15px rgba(255,107,0,0.5);">
+            VER RESULTADOS| TILINESGAMES <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+
+    <div id="gameModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center;">
+        <div style="background-color: #222; border: 3px solid #FF6B00; border-radius: 10px; padding: 20px; max-width: 500px; width: 90%; text-align: center; position: relative;">
+            <button id="closeModalBtn" style="position: absolute; top: 10px; right: 10px; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">×</button>
+            <h2 style="color: #FF6B00; margin-bottom: 20px;">¡JUEGO COMPLETADO!</h2>
+            <p id="finalScoreText" style="font-size: 18px; margin-bottom: 20px;">Tu puntuación final: <span style="color: #FF6B00;">0</span> puntos</p>
+            <p style="margin-bottom: 20px;">¡Buen trabajo! Sigue practicando para mejorar tu puntuación.</p>
+            <button id="playAgainBtn" style="background-color: #FF6B00; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 12px; margin-top: 10px;">JUGAR DE NUEVO</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="versionsModal">
+        <div class="modal-container">
+            <button class="modal-close" id="closeVersionsModal">&times;</button>
+            <h3 class="modal-title">Versiones Disponibles</h3>
+            
+            <div class="versions-grid">
+                <div class="version-card">
+                    <div class="version-img">
+                        <img src="./img/oficial.jpg" alt="Versión Global">
+                    </div>
+                    <div class="version-content">
+                        <h4>Versión Global</h4>
+                        <p>Versión estándar para la mayoría de regiones</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.tencent.ig" class="version-btn" target="_blank">Descargar</a>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-img">
+                        <img src="./img-temp/kr.jpg" alt="Versión KR">
+                    </div>
+                    <div class="version-content">
+                        <h4>Versión KR (Corea)</h4>
+                        <p>Versión especial para Corea del Sur</p>
+                        <a href="https://www.mediafire.com/file/7x76xebod8233e2/PUBG_Mobile_3.9.0_Kr.apk/file" class="version-btn" target="_blank">Descargar</a>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-img">
+                        <img src="./img-temp/bgmi.webp" alt="Versión India">
+                    </div>
+                    <div class="version-content">
+                        <h4>Versión India (BGMI)</h4>
+                        <p>Versión especial para el mercado indio (Archivo XAPK)</p>
+                        <a href="https://www.mediafire.com/file/zcb7oy04bui73v3/Pubg_BGMI_tilines_fc.xapk/file" class="version-btn" target="_blank">Descargar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">TILINES FC</div>
+        <div class="footer-links">
+            <a href="#publicaciones">Publicaciones</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#clan">Clan</a>
+            <a href="#redes">Redes</a>
+            <a href="https://t.me/+wei9FKSQL7UyMDVh">Contacto</a>
+            <p>|Version: 0.9|</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+   
+    <div class="page-like-container">
+        <button class="page-like-btn" id="pageLikeBtn"><i class="far fa-heart"></i></button>
+        <div class="page-like-count" id="pageLikeCount">0</div>
+    </div>
+    <script src="./script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Abrir modal de temporada
+            const openSeasonModal = document.getElementById('openSeasonModal');
+            const seasonModal = document.getElementById('seasonModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            if(openSeasonModal && seasonModal && closeModal) {
+                openSeasonModal.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    seasonModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    initGallery();
+                });
+                
+                closeModal.addEventListener('click', function() {
+                    seasonModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    pauseAllVideos();
+                });
+                
+                // Cerrar al hacer clic fuera
+                seasonModal.addEventListener('click', function(e) {
+                    if(e.target === seasonModal) {
+                        seasonModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        pauseAllVideos();
+                    }
+                });
+                
+                // Cerrar con ESC
+                document.addEventListener('keydown', function(e) {
+                    if(e.key === 'Escape' && seasonModal.style.display === 'flex') {
+                        seasonModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        pauseAllVideos();
+                    }
+                });
+            }
+            
+            // Abrir modal de versiones
+            const openVersionsModal = document.getElementById('openVersionsModal');
+            const versionsModal = document.getElementById('versionsModal');
+            const closeVersionsModal = document.getElementById('closeVersionsModal');
+            
+            if(openVersionsModal && versionsModal && closeVersionsModal) {
+                openVersionsModal.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    versionsModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                closeVersionsModal.addEventListener('click', function() {
+                    versionsModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+                
+                // Cerrar al hacer clic fuera
+                versionsModal.addEventListener('click', function(e) {
+                    if(e.target === versionsModal) {
+                        versionsModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                // Cerrar con ESC
+                document.addEventListener('keydown', function(e) {
+                    if(e.key === 'Escape' && versionsModal.style.display === 'flex') {
+                        versionsModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            function pauseAllVideos() {
+                const videos = document.querySelectorAll('.gallery-item video');
+                videos.forEach(video => {
+                    video.pause();
+                });
+            }
+            
+            // Función para inicializar la galería
+            function initGallery() {
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                const prevBtn = document.querySelector('.gallery-prev');
+                const nextBtn = document.querySelector('.gallery-next');
+                const indicatorsContainer = document.getElementById('galleryIndicators');
+                let currentIndex = 0;
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                // Crear indicadores
+                if (indicatorsContainer) {
+                    indicatorsContainer.innerHTML = '';
+                    galleryItems.forEach((_, index) => {
+                        const indicator = document.createElement('div');
+                        indicator.className = 'gallery-indicator';
+                        if (index === 0) indicator.classList.add('active');
+                        indicator.addEventListener('click', () => {
+                            navigateTo(index);
+                        });
+                        indicatorsContainer.appendChild(indicator);
+                    });
+                }
+                
+                // Mostrar el primer elemento
+                showItem(currentIndex);
+                
+                // Event listeners para navegación
+                if(prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', function() {
+                        navigate(-1);
+                    });
+                    
+                    nextBtn.addEventListener('click', function() {
+                        navigate(1);
+                    });
+                }
+                
+                // Navegación táctil
+                const gallery = document.querySelector('.season-gallery');
+                if (gallery) {
+                    gallery.addEventListener('touchstart', function(e) {
+                        touchStartX = e.changedTouches[0].screenX;
+                    }, { passive: true });
+                    
+                    gallery.addEventListener('touchend', function(e) {
+                        touchEndX = e.changedTouches[0].screenX;
+                        handleSwipe();
+                    }, { passive: true });
+                }
+                
+                function handleSwipe() {
+                    const difference = touchStartX - touchEndX;
+                    if (difference > 50) { // Swipe izquierda
+                        navigate(1);
+                    } else if (difference < -50) { // Swipe derecha
+                        navigate(-1);
+                    }
+                }
+                
+                function navigate(direction) {
+                    const currentVideo = galleryItems[currentIndex].querySelector('video');
+                    if(currentVideo) {
+                        currentVideo.pause();
+                    }
+                    
+                    currentIndex += direction;
+                    
+                    if(currentIndex < 0) {
+                        currentIndex = galleryItems.length - 1;
+                    } else if(currentIndex >= galleryItems.length) {
+                        currentIndex = 0;
+                    }
+                    
+                    showItem(currentIndex);
+                }
+                
+                function navigateTo(index) {
+                    const currentVideo = galleryItems[currentIndex].querySelector('video');
+                    if(currentVideo) {
+                        currentVideo.pause();
+                    }
+                    
+                    currentIndex = index;
+                    showItem(currentIndex);
+                }
+                
+                function showItem(index) {
+                    galleryItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    const indicators = document.querySelectorAll('.gallery-indicator');
+                    if (indicators.length > 0) {
+                        indicators.forEach(indicator => {
+                            indicator.classList.remove('active');
+                        });
+                        indicators[index].classList.add('active');
+                    }
+                    
+                    galleryItems[index].classList.add('active');
+                    
+                    const video = galleryItems[index].querySelector('video');
+                    if(video) {
+                        video.currentTime = 0;
+                        const playPromise = video.play();
+                        
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                console.log('Autoplay prevented:', error);
+                                video.controls = true;
+                            });
+                        }
+                    }
+                }
+            }
+            
+            // Ocultar preloader cuando la página cargue
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    document.querySelector('.preloader').style.display = 'none';
+                }, 1500); // 1.5 segundos para la animación
+            });
+        });
+        // Notificaciones
+const notificationBell = document.getElementById('notificationBell');
+const notificationContainer = document.getElementById('notificationContainer');
+const notificationClose = document.getElementById('notificationClose');
+
+if (notificationBell && notificationContainer && notificationClose) {
+    notificationBell.addEventListener('click', function(e) {
+        e.stopPropagation();
+        notificationContainer.style.display = notificationContainer.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    notificationClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        notificationContainer.style.display = 'none';
+    });
+    
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (!notificationContainer.contains(e.target) && e.target !== notificationBell) {
+            notificationContainer.style.display = 'none';
+        }
+    });
+    
+    // Cerrar con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            notificationContainer.style.display = 'none';
+        }
+    });
+}
+// Al cargar la página, agregar animación si hay notificaciones
+window.addEventListener('load', function() {
+    const notificationBell = document.getElementById('notificationBell');
+    if (notificationBell) {
+        notificationBell.classList.add('new-notification');
+        
+        // Opcional: Quitar la animación después de 3 segundos
+        setTimeout(() => {
+            notificationBell.classList.remove('new-notification');
+        }, 3000);
+    }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/icono.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/icono.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/icono.png">
+    <title>TILINES FC - Guía de Optimización</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B00;
+            --primary-dark: #e05d00;
+            --dark: #111;
+            --darker: #0a0a0a;
+            --light: #f8f8f8;
+            --gray: #333;
+            --blue-gradient: linear-gradient(135deg, #0061ff 0%, #60efff 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            position: fixed;
+        }
+        
+        body {
+            background-color: var(--darker);
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            line-height: 1.5;
+            touch-action: pan-y;
+            overscroll-behavior: contain;
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            border: 5px solid var(--gray);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+            image-rendering: pixelated;
+        }
+        
+        .preloader p {
+            font-size: 12px;
+            color: var(--light);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--dark);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-img img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        
+        .logo h1 {
+            font-size: 14px;
+            color: white;
+            text-shadow: 2px 2px 0 var(--primary);
+        }
+        
+        .back-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Main Content */
+        .guide-container {
+            max-width: 100%;
+            margin: 60px auto 20px;
+            padding: 0;
+            animation: fadeIn 0.8s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .guide-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        
+        .guide-header h2 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--primary);
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .guide-header p {
+            font-size: 8px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+        
+        .version-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        
+        .version-btn {
+            padding: 8px 12px;
+            background: var(--gray);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 8px;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .version-btn.active {
+            background: var(--primary-dark);
+            border-color: var(--primary);
+        }
+        
+        .shizuku-btn {
+            background: var(--blue-gradient);
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            box-shadow: 0 2px 5px rgba(0,97,255,0.3);
+        }
+        
+        .shizuku-btn strong {
+            background: white;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .guide-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0 10px;
+        }
+        
+        .steps-container {
+            order: 1;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .steps-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .steps-inner {
+            display: inline-flex;
+            gap: 10px;
+            padding: 0 5px;
+        }
+        
+        .step {
+            background: rgba(30,30,30,0.8);
+            border-left: 3px solid var(--primary);
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: inline-block;
+            width: 280px;
+            white-space: normal;
+            vertical-align: top;
+        }
+        
+        .step.active {
+            background: rgba(255,107,0,0.2);
+        }
+        
+        .step-number {
+            font-size: 8px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .step-title {
+            font-size: 10px;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .step-description {
+            font-size: 8px;
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+        
+        .step-content {
+            display: none;
+            margin-top: 8px;
+        }
+        
+        .step.active .step-content {
+            display: block;
+        }
+        
+        .code-block {
+            background: rgba(20,20,20,0.9);
+            color: #f8f8f2;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 8px;
+            margin: 8px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 8px;
+            margin-top: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            text-decoration: none;
+        }
+        
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 8px;
+            margin-top: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .tip {
+            font-size: 7px;
+            color: #aaa;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .media-slider-container {
+            order: 2;
+            position: relative;
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+        
+        .media-slider {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            border: 2px solid var(--primary);
+            background: #151515;
+        }
+        
+        .media-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+        
+        .media-slide.active {
+            opacity: 1;
+        }
+        
+        .media-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 3px;
+            image-rendering: pixelated;
+        }
+        
+        .media-slide video {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 3px;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5px;
+            z-index: 10;
+        }
+        
+        .slider-btn {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+        }
+        
+        .slider-btn:hover {
+            background: var(--primary);
+        }
+        
+        .slide-indicators {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+        
+        .indicator.active {
+            background: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            body {
+                font-size: 12px;
+            }
+            
+            .guide-container {
+                padding: 0;
+                margin-top: 70px;
+            }
+            
+            .guide-header h2 {
+                font-size: 20px;
+            }
+            
+            .guide-header p {
+                font-size: 10px;
+            }
+            
+            .version-btn {
+                font-size: 10px;
+                padding: 10px 15px;
+            }
+            
+            .shizuku-btn {
+                font-size: 10px;
+                padding: 10px 12px;
+            }
+            
+            .step {
+                padding: 12px;
+                width: 320px;
+            }
+            
+            .step-number {
+                font-size: 10px;
+            }
+            
+            .step-title {
+                font-size: 12px;
+            }
+            
+            .step-description {
+                font-size: 10px;
+            }
+            
+            .code-block {
+                font-size: 10px;
+                padding: 10px;
+            }
+            
+            .download-btn, .copy-btn {
+                font-size: 10px;
+            }
+            
+            .tip {
+                font-size: 9px;
+            }
+            
+            .media-slider {
+                height: 400px; /* Altura aumentada para pantallas más grandes */
+            }
+            
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .guide-content {
+                flex-direction: row;
+                gap: 20px;
+                padding: 0 20px;
+            }
+            
+            .steps-container {
+                flex: 1;
+                order: 1;
+                overflow-x: hidden;
+                white-space: normal;
+            }
+            
+            .steps-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                padding: 0;
+            }
+            
+            .step {
+                width: auto;
+                display: block;
+            }
+            
+            .media-slider-container {
+                flex: 1;
+                order: 2;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+        <p>Cargando guía...</p>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-img">
+                <img src="./img/icono.png" alt="Logo TILINES FC">
+            </div>
+            <h1>TILINES FC</h1>
+        </div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver</a>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="guide-container">
+        <div class="guide-header">
+            <h2>GUÍA DE OPTIMIZACIÓN</h2>
+            <p>Maximiza el rendimiento de PUBG Mobile</p>
+            
+            <div class="version-selector">
+                <button class="version-btn active" data-version="android11">Android 11-</button>
+                <button class="version-btn" data-version="android12">Android 12+</button>
+            </div>
+            
+            <div id="shizukuContainer" style="display: none;">
+                <a href="https://shizuku.rikka.app/download/" class="shizuku-btn" target="_blank">
+                    <i class="fas fa-download"></i> Descargar <strong>Shizuku (NECESARIO)</strong>
+                </a>
+            </div>
+        </div>
+        
+        <div class="guide-content">
+            <!-- Steps Container -->
+            <div class="steps-container">
+                <div class="steps-inner">
+                    <!-- Paso 1 -->
+                    <div class="step active" data-step="1">
+                        <div class="step-number">PASO 1</div>
+                        <h3 class="step-title">Preparación</h3>
+                        <p class="step-description">Herramientas necesarias</p>
+                        
+                        <div class="step-content">
+                            <div class="code-block">
+•PGT+ (Cuando Instale Elige Version del Juego que uses "Global, KR, BGMI, ETC.")
+•SHISUKU (ANDROID 12+)
+                            </div>
+                            <a href="https://www.mediafire.com/file/mtb5f4cyiyplz7t/PGT+_tilines.apk/file" class="download-btn" target="_blank">
+                                <i class="fas fa-download"></i> Descargar PGT+
+                            </a>
+                            <div class="tip">
+                                Deberas Vincular Shizuku a tu telefono en caso que uses android 12 o superior y tener modo desarrollador activo.
+                            </div>
+                            <div class="tip">
+                                <i class="fas fa-info-circle"></i> Requiere permisos de instalación
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Paso 2 -->
+                    <div class="step" data-step="2">
+                        <div class="step-number">PASO 2</div>
+                        <h3 class="step-title">Gráficos BASICOS</h3>
+                        <p class="step-description">Ajustes visuales</p>
+                        
+                        <div class="step-content">
+                            <div class="code-block">
+°Vamos a tener en cuenta que bajaremos todos los ajuste para tener mayor tasa de refresco en el juego.
+
+1-Resolución: 640x480 (VGA)
+
+2- Gráficos: Smooth
+
+3- FPS: Extreme (60 FPS). Si tu telefono soporta 60 fps saldra activa en el juego si no sale es que no soporta pero igual forma activalo, 90 fps para arriba telefonos gama alta.
+
+4- Estilo: Classic
+
+5- Calidad Sonido: LOW
+
+6- Sombras: OFF
+
+°Dale Aplicar (Inicio parte superior) luego Ejecutar Juego (Guarda Configuracion en una carpeta pedira por ser primera vez).
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Paso 3 -->
+                    <div class="step" data-step="3">
+                        <div class="step-number">PASO 3</div>
+                        <h3 class="step-title">SHISUKU-Graficos Avanzados</h3>
+                        <p class="step-description">Android 11-, 12+</p>
+                        
+                        <div class="step-content">
+                            <div class="code-block">
+1- Activa opcion "Shisuku Mode" para que funncione los Cambios en androids Superiores "No Desinstale Shisuku" (ANDROID 12+).
+
+2- En la parte baja ultimo puedes activar "mejora de memoria" para sacar mas rendimiento.
+
+3-Y activa "Guardar configuración Sensibilidades" para que no se cambien dentro del juego.
+
+°Los dos ultimos paso funcionan todas las versiones de android.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Media Slider -->
+            <div class="media-slider-container">
+                <div class="media-slider">
+                    <div class="media-slide active">
+                        <img src="./img/pgt.jpg" alt="Herramientas">
+                    </div>
+                    <div class="media-slide">
+                        <img src="./img/paso 2.jpg" alt="Configuración">
+                    </div>
+                    <div class="media-slide">
+                        <img src="./img/paso 3.png" alt="Shisuku">
+                    </div>
+                </div>
+                
+                <div class="slider-nav">
+                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                
+                <div class="slide-indicators">
+                    <div class="indicator active" data-slide="0"></div>
+                    <div class="indicator" data-slide="1"></div>
+                    <div class="indicator" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.preloader').style.opacity = '0';
+                setTimeout(function() {
+                    document.querySelector('.preloader').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        const versionBtns = document.querySelectorAll('.version-btn');
+        const shizukuContainer = document.getElementById('shizukuContainer');
+        
+        versionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                versionBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (this.dataset.version === 'android12') {
+                    shizukuContainer.style.display = 'block';
+                } else {
+                    shizukuContainer.style.display = 'none';
+                }
+            });
+        });
+
+        const steps = document.querySelectorAll('.step');
+        const mediaSlides = document.querySelectorAll('.media-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        
+        function activateStep(index) {
+            steps.forEach(step => step.classList.remove('active'));
+            steps[index].classList.add('active');
+            updateSlide(index);
+        }
+        
+        function updateSlide(index) {
+            mediaSlides.forEach(slide => slide.classList.remove('active'));
+            mediaSlides[index].classList.add('active');
+            
+            indicators.forEach(ind => ind.classList.remove('active'));
+            indicators[index].classList.add('active');
+            
+            currentSlide = index;
+        }
+        
+        steps.forEach((step, index) => {
+            step.addEventListener('click', function() {
+                activateStep(index);
+            });
+        });
+        
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        
+        function showPrevSlide() {
+            let newIndex = currentSlide - 1;
+            if (newIndex < 0) newIndex = mediaSlides.length - 1;
+            activateStep(newIndex);
+        }
+        
+        function showNextSlide() {
+            let newIndex = currentSlide + 1;
+            if (newIndex >= mediaSlides.length) newIndex = 0;
+            activateStep(newIndex);
+        }
+        
+        prevBtn.addEventListener('click', showPrevSlide);
+        nextBtn.addEventListener('click', showNextSlide);
+        
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function() {
+                activateStep(index);
+            });
+        });
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') showPrevSlide();
+            if (e.key === 'ArrowRight') showNextSlide();
+        });
+        
+        document.body.addEventListener('touchmove', function(e) {
+            if (e.target.classList.contains('media-slider')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
