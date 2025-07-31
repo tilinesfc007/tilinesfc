@@ -832,9 +832,10 @@
                     <span class="feature-badge">GRÁFICOS SMOOT</span>
                 </div>
                 
-                <a href="#" class="event-link">
+                <a href="#" class="event-link" id="shareBtn">
                     <i class="fas fa-share"></i> Compartir Evento
                 </a>
+
             </div>
         </div>
     </section>
@@ -1100,6 +1101,45 @@
                 closeModalFunc();
             }
         });
+          document.getElementById('shareBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentUrl = window.location.href;
+            const title = 'PUBG Mobile Halloween Beta 4.0 | TILINES FC';
+            
+            if (navigator.share) {
+                // Dispositivos móviles con API de compartir
+                navigator.share({
+                    title: title,
+                    text: '¡Mira este evento exclusivo de Halloween en PUBG Mobile Beta 4.0!',
+                    url: currentUrl
+                }).catch(err => {
+                    console.log('Error al compartir:', err);
+                    copyToClipboard(currentUrl);
+                });
+            } else {
+                // Para navegadores de escritorio
+                copyToClipboard(currentUrl);
+            }
+        });
+
+        // Función para copiar al portapapeles
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'URL copiada al portapapeles!' : 'No se pudo copiar la URL';
+                alert(msg);
+            } catch (err) {
+                alert('Error al copiar la URL: ' + err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
     </script>
 </body>
 </html>
