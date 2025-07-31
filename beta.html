@@ -6,22 +6,23 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./img/icono.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./img/icono.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./img/icono.png">
-    <title>TILINES FC - PUBG Mobile Beta</title>
+    <title>TILINES FC - PUBG Mobile Beta 4.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #FF6B00;
-            --primary-dark: #e05d00;
+            --primary: #FF6E00;
+            --primary-dark: #D45A00;
             --dark: #111;
             --darker: #0a0a0a;
             --light: #f8f8f8;
             --gray: #333;
-            --harry-gold: #FFD700;
-            --harry-blue: #0E1A40;
-            --harry-red: #740001;
-            --gradient-orange: linear-gradient(135deg, #FF6B00 0%, #FF9500 100%);
-            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            --halloween-orange: #FF6E00;
+            --halloween-purple: #6A0DAD;
+            --halloween-green: #00AA00;
+            --gradient-orange: linear-gradient(135deg, #FF6E00 0%, #FF9500 100%);
+            --gradient-halloween: linear-gradient(135deg, #6A0DAD 0%, #FF6E00 100%);
+            --gradient-green: linear-gradient(135deg, #00AA00 0%, #007700 100%);
         }
         
         * {
@@ -127,8 +128,7 @@
         }
         
         .beta-tag {
-            background: var(--harry-gold);
-            color: var(--harry-blue);
+            background: var(--halloween-purple);
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 8px;
@@ -136,7 +136,7 @@
         }
         
         .download-btn-header {
-            background: var(--gradient-orange);
+            background: var(--gradient-halloween);
             color: white;
             border: none;
             padding: 8px 12px;
@@ -157,7 +157,7 @@
         .hero {
             height: 60vh;
             min-height: 400px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('./filtraciones/harry.webp') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('./img-temp/noche.jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -176,13 +176,13 @@
         .hero h2 {
             font-size: 20px;
             margin-bottom: 15px;
-            color: var(--harry-gold);
+            color: var(--halloween-orange);
             text-shadow: 0 2px 5px rgba(0,0,0,0.8);
             line-height: 1.4;
         }
         
         .hero h2 span {
-            color: var(--primary);
+            color: var(--halloween-purple);
             display: block;
         }
         
@@ -213,14 +213,14 @@
         }
         
         .primary-btn {
-            background: var(--gradient-orange);
+            background: var(--gradient-halloween);
             color: white;
         }
         
         .secondary-btn {
             background: transparent;
             color: white;
-            border: 1px solid var(--harry-gold);
+            border: 1px solid var(--halloween-orange);
         }
         
         .hero-btn:hover {
@@ -228,7 +228,7 @@
         }
         
         .secondary-btn:hover {
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 110, 0, 0.1);
         }
         
         @keyframes fadeInUp {
@@ -270,7 +270,7 @@
             border-radius: 5px;
             overflow: hidden;
             margin-bottom: 15px;
-            border: 1px solid var(--harry-gold);
+            border: 1px solid var(--halloween-orange);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
@@ -297,8 +297,8 @@
         
         .event-date {
             display: inline-block;
-            background: var(--harry-blue);
-            color: var(--harry-gold);
+            background: var(--halloween-purple);
+            color: var(--halloween-orange);
             padding: 3px 8px;
             border-radius: 3px;
             font-size: 8px;
@@ -308,7 +308,7 @@
         .event-card h3 {
             font-size: 12px;
             margin-bottom: 8px;
-            color: var(--harry-gold);
+            color: var(--halloween-orange);
         }
         
         .event-card p {
@@ -327,15 +327,20 @@
         }
         
         .feature-badge {
-            background: var(--harry-red);
-            color: white;
+            background: var(--halloween-purple);
+            color: var(--halloween-orange);
             padding: 3px 6px;
             border-radius: 3px;
             font-size: 7px;
         }
         
+        .green-badge {
+            background: var(--halloween-green);
+            color: white;
+        }
+        
         .event-link {
-            color: var(--harry-gold);
+            color: var(--halloween-orange);
             text-decoration: none;
             font-size: 8px;
             display: flex;
@@ -372,7 +377,7 @@
         .feature-icon {
             width: 30px;
             height: 30px;
-            background: var(--gradient-orange);
+            background: var(--gradient-halloween);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -380,6 +385,10 @@
             margin-bottom: 10px;
             font-size: 12px;
             color: white;
+        }
+        
+        .green-icon {
+            background: var(--gradient-green);
         }
         
         .feature-card h3 {
@@ -485,6 +494,98 @@
             background: var(--primary);
         }
         
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: var(--dark);
+            border-radius: 5px;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--halloween-orange);
+            box-shadow: 0 0 20px rgba(255, 110, 0, 0.5);
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #aaa;
+            cursor: pointer;
+        }
+        
+        .modal h2 {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: var(--halloween-orange);
+        }
+        
+        .modal p {
+            font-size: 8px;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .modal-btn {
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .bit32-btn {
+            background: var(--halloween-purple);
+            color: white;
+        }
+        
+        .bit64-btn {
+            background: var(--halloween-orange);
+            color: white;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .modal-features {
+            font-size: 8px;
+            color: #aaa;
+            margin-top: 15px;
+            text-align: left;
+        }
+        
+        .modal-features li {
+            margin-bottom: 5px;
+        }
+        
         /* Download Section */
         .download-section {
             padding: 30px 15px;
@@ -527,26 +628,6 @@
             align-items: center;
             gap: 5px;
             font-size: 8px;
-        }
-        
-        .qr-code {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 10px;
-            background: white;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        
-        .qr-code img {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .qr-text {
-            font-size: 8px;
-            color: #aaa;
-            margin-bottom: 10px;
         }
         
         /* Footer */
@@ -669,6 +750,23 @@
                 height: 300px;
             }
             
+            .modal h2 {
+                font-size: 16px;
+            }
+            
+            .modal p {
+                font-size: 10px;
+            }
+            
+            .modal-btn {
+                font-size: 12px;
+                padding: 12px;
+            }
+            
+            .modal-features {
+                font-size: 10px;
+            }
+            
             .download-container h2 {
                 font-size: 20px;
             }
@@ -694,7 +792,7 @@
             </div>
             <h1>TILINES FC <span class="beta-tag">BETA</span></h1>
         </div>
-        <button class="download-btn-header">
+        <button class="download-btn-header" id="navDownloadBtn">
             <i class="fas fa-download"></i> Descargar
         </button>
     </header>
@@ -702,39 +800,36 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h2>EVENTO EXCLUSIVO <span>HARRY POTTER</span></h2>
-            <p>Descubre la magia en PUBG Mobile Beta con la colaboración especial de Harry Potter. Varitas, escobas voladoras y nuevos skins mágicos!</p>
-            <p>¡Algunos Anuncios de aqui todavia no son Oficiales solo la colaboracion Confirmada</p>
+            <h2>EVENTO EXCLUSIVO <span>HALLOWEEN 2025</span></h2>
+            <p>La actualización 4.0 de PUBG Mobile ya está aquí en version beta. Nuevo mapa nocturno, métodos de movilidad especiales y gráficos optimizados con tecnología Smoot.</p>
             <div class="hero-buttons">
-                <a href="#download" class="hero-btn primary-btn">
+                <a href="#" class="hero-btn primary-btn" id="heroDownloadBtn">
                     <i class="fas fa-download"></i> Descargar Beta
-                </a>
-                <a href="#event" class="hero-btn secondary-btn">
-                    <i class="fas fa-info-circle"></i> Ver Evento
                 </a>
             </div>
         </div>
     </section>
     
     <!-- Event Section -->
-    <section class="event-section" id="event">
+    <section class="event-section">
         <div class="section-title">
-            <h2>COLABORACIÓN HARRY POTTER</h2>
+            <h2>EVENTO HALLOWEEN</h2>
             <p>Nuevas mecánicas y contenido exclusivo por tiempo limitado</p>
         </div>
         
         <div class="event-card">
             <div class="event-image">
-                <img src="./filtraciones/harry.webp" alt="Harry Potter Event">
+                <img src="./img-temp/beta4-0.jpg" alt="Halloween Event" style="object-fit: contain; background-color: #000;">
             </div>
             <div class="event-content">
-                <span class="event-date">PROX.31 JULIO SALE LA BETA</span>
-                <h3>El Torneo de los Tres Magos</h3>
-                <p>Participa en este evento especial donde las casas de Hogwarts compiten en batallas épicas. Elige tu casa, gana puntos y consigue recompensas exclusivas.</p>
+                <span class="event-date">DISPONIBLE EN LA BETA</span>
+                <h3>EVENTO FRENETICO</h3>
+                <p>Un evento con muchas armas y nuevas mecanicas.</p>
                 <div class="event-features">
-                    <span class="feature-badge">NUEVAS VARITAS</span>
-                    <span class="feature-badge">ESCOBAS VOLADORAS</span>
-                    <span class="feature-badge">SKINS MÁGICAS</span>
+                    <span class="feature-badge">MAPA NOCTURNO</span>
+                    <span class="feature-badge">SKINS TERROR</span>
+                    <span class="feature-badge green-badge">NUEVOS MOVIMIENTOS</span>
+                    <span class="feature-badge">GRÁFICOS SMOOT</span>
                 </div>
                 
                 <a href="#" class="event-link">
@@ -745,43 +840,44 @@
     </section>
     
     <!-- Features Section -->
-    <section class="features">
+    <section class="features" id="features">
         <div class="section-title">
-            <h2>NOVEDADES DE LA BETA</h2>
-            <p>Funciones exclusivas que puedes probar ahora</p>
+            <h2>NUEVAS CARACTERÍSTICAS</h2>
+            <p>Descubre todo lo que ofrece la actualización</p>
         </div>
         
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-hat-wizard"></i>
-                </div>
-                <h3>Magia en el Campo</h3>
-                <p>Usa hechizos como Wingardium Leviosa para mover objetos o Expelliarmus para desarmar enemigos.</p>
-            </div>
             
             <div class="feature-card">
                 <div class="feature-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h3>Mapa Nocturno</h3>
+                <p>Explora Erangel y Miramar con una iluminación especial y zonas embrujadas que aparecen aleatoriamente.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon green-icon">
                     <i class="fas fa-broom"></i>
                 </div>
-                <h3>Transporte Mágico</h3>
-                <p>Nuevas escobas voladoras como vehículos rápidos y ágiles para moverse por el mapa.</p>
+                <h3>Escobas Voladoras</h3>
+                <p>Nuevo vehículo de movilidad vertical limitada con controles ágiles y maniobras especiales.</p>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-tshirt"></i>
+                    <i class="fas fa-tachometer-alt"></i>
                 </div>
-                <h3>Skins de Casas</h3>
-                <p>Viste los colores de Gryffindor, Slytherin, Hufflepuff o Ravenclaw con skins exclusivas.</p>
+                <h3>Gráficos Smoot</h3>
+                <p>Tecnología de renderizado optimizado para mejor rendimiento sin sacrificar calidad visual.</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-map-marked-alt"></i>
+                <div class="feature-icon green-icon">
+                    <i class="fas fa-skull-crossbones"></i>
                 </div>
-                <h3>Mapa Hogwarts</h3>
-                <p>Explora un nuevo mapa inspirado en el castillo de Hogwarts y sus terrenos.</p>
+                <h3>Armas Especiales</h3>
+                <p>Pruebas armas especiales y formas mas rapidas para movilizarse.</p>
             </div>
         </div>
     </section>
@@ -789,23 +885,17 @@
     <!-- Slider Section -->
     <section class="slider-section">
         <div class="section-title">
-            <h2>GALERÍA BETA</h2>
-            <p>Capturas exclusivas del evento Harry Potter</p>
+            <h2>GALERÍA</h2>
+            <p>Capturas exclusivas del evento</p>
         </div>
         
         <div class="slider-container">
             <div class="game-slider">
                 <div class="game-slide active">
-                    <img src="./img/akmman.jpg" alt="Harry Potter Event 1">
+                    <img src="./img-temp/evento.jpg" alt="Halloween Event 1" style="object-fit: contain; background-color: #000;">
                 </div>
                 <div class="game-slide">
-                    <img src="./img/s12k.jpg" alt="Harry Potter Event 2">
-                </div>
-                <div class="game-slide">
-                    <img src="./img/user.png" alt="Harry Potter Event 3">
-                </div>
-                <div class="game-slide">
-                    <img src="./img/pochi.jpg" alt="Harry Potter Event 4">
+                    <img src="./img-temp/eventoo.jpg" alt="Halloween Event 2" style="object-fit: contain; background-color: #000;">
                 </div>
             </div>
             
@@ -817,17 +907,15 @@
             <div class="slide-indicators">
                 <div class="indicator active" data-slide="0"></div>
                 <div class="indicator" data-slide="1"></div>
-                <div class="indicator" data-slide="2"></div>
-                <div class="indicator" data-slide="3"></div>
             </div>
         </div>
     </section>
     
     <!-- Download Section -->
-    <section class="download-section" id="download">
+    <section class="download-section">
         <div class="download-container">
-            <h2>DESCARGA LA BETA</h2>
-            <p>Accede ahora al evento Harry Potter y todas las funciones exclusivas de la versión beta</p>
+            <h2>¿LISTO PARA EL TERROR?</h2>
+            <p>Descarga ahora la versión beta con todas las nuevas características</p>
             
             <div class="download-options">
                 <div class="download-option">
@@ -836,14 +924,13 @@
                 </div>
             </div>
             
-            <div class="qr-code">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tilinesfc.com/pubg-beta" alt="QR Code">
-            </div>
-            <p class="qr-text">Escanéa el código QR para descargar en tu móvil</p>
+            <button class="hero-btn primary-btn" id="footerDownloadBtn" style="display: inline-flex; margin-top: 10px;">
+                <i class="fas fa-download"></i> Descargar Beta 4.0
+            </button>
             
-            <a href="#" class="hero-btn primary-btn" style="display: inline-flex; margin-top: 10px;">
-                <i class="fas fa-download"></i> Descargar Beta (1.8GB)
-            </a>
+            <p style="font-size: 8px; color: #aaa; margin-top: 15px;">
+                <i class="fas fa-info-circle"></i> Versión optimizada con gráficos Smoot para mejor rendimiento
+            </p>
         </div>
     </section>
     
@@ -860,6 +947,31 @@
             <a href="#" class="footer-link">Soporte</a>
         </div>
     </footer>
+
+    <!-- Download Modal -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>SELECCIONA TU VERSIÓN</h2>
+            <p>Elige la versión compatible con tu dispositivo</p>
+            
+            <div class="modal-buttons">
+                <a href="https://www.mediafire.com/file/b69ozjmh27439zc/pubgM_beta4.0_tilinesfc%252832_bits%2529.apk/file" class="modal-btn bit32-btn">
+                    <i class="fas fa-mobile-alt"></i> Versión 32 bits (1.03GB)
+                </a>
+                <a href="https://www.mediafire.com/file/4htoaqrfkabsjr6/pubgM_beta4.0_tilinesfc(64+bits).apk/file" class="modal-btn bit64-btn">
+                    <i class="fas fa-mobile"></i> Versión 64 bits (1.15GB)
+                </a>
+            </div>
+            
+            <ul class="modal-features">
+                <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> Ambas versiones incluyen gráficos Smoot</li>
+                <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> 32 bits: Mayor compatibilidad</li>
+                <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> 64 bits: Mejor rendimiento</li>
+                <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> Evento Halloween completo</li>
+            </ul>
+        </div>
+    </div>
 
     <script>
         // Preloader
@@ -949,14 +1061,44 @@
             });
         });
         
-        // Header download button
-        const headerDownloadBtn = document.querySelector('.download-btn-header');
-        headerDownloadBtn.addEventListener('click', function(e) {
+        // Modal functionality
+        const modal = document.getElementById('downloadModal');
+        const navDownloadBtn = document.getElementById('navDownloadBtn');
+        const heroDownloadBtn = document.getElementById('heroDownloadBtn');
+        const footerDownloadBtn = document.getElementById('footerDownloadBtn');
+        const closeModal = document.querySelector('.close-modal');
+        
+        function openModal() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModalFunc() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        navDownloadBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.scrollTo({
-                top: document.querySelector('#download').offsetTop - 70,
-                behavior: 'smooth'
-            });
+            openModal();
+        });
+        
+        heroDownloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+        
+        footerDownloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+        
+        closeModal.addEventListener('click', closeModalFunc);
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
         });
     </script>
 </body>
