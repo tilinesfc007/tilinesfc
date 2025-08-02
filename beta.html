@@ -545,6 +545,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            display: none; /* Oculto inicialmente */
         }
         
         .modal-btn {
@@ -580,10 +581,66 @@
             color: #aaa;
             margin-top: 15px;
             text-align: left;
+            display: none; /* Oculto inicialmente */
         }
         
         .modal-features li {
             margin-bottom: 5px;
+        }
+        
+        /* CAPTCHA Styles */
+        .captcha-container {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 5px;
+            border: 1px solid var(--halloween-orange);
+        }
+        
+        .captcha-text {
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin: 10px 0;
+            color: var(--halloween-orange);
+            background: rgba(0,0,0,0.5);
+            padding: 5px;
+            border-radius: 3px;
+            user-select: none;
+        }
+        
+        .captcha-input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--halloween-purple);
+            color: white;
+            border-radius: 3px;
+            font-size: 10px;
+            text-align: center;
+        }
+        
+        .captcha-btn {
+            background: var(--gradient-halloween);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 3px;
+            font-size: 8px;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: all 0.3s;
+        }
+        
+        .captcha-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .captcha-error {
+            color: #ff4444;
+            font-size: 8px;
+            margin-top: 5px;
+            display: none;
         }
         
         /* Download Section */
@@ -774,6 +831,18 @@
             .download-container p {
                 font-size: 10px;
             }
+            
+            .captcha-text {
+                font-size: 16px;
+            }
+            
+            .captcha-input {
+                font-size: 12px;
+            }
+            
+            .captcha-btn {
+                font-size: 10px;
+            }
         }  
             
         
@@ -803,7 +872,7 @@
     <section class="hero">
         <div class="hero-content">
             <h2>EVENTO EXCLUSIVO <span>HALLOWEEN 2025</span></h2>
-            <p>La actualización 4.0 de PUBG Mobile ya está aquí en version beta. Nuevo mapa nocturno, métodos de movilidad especiales y gráficos optimizados con tecnología Smoot.</p>
+            <p>La actualización 4.0 de PUBG Mobile ya está aquí en version beta. Nuevo mapa nocturno, métodos de movilidad especiales y gráficos optimizados con tecnología Super Smooth.</p>
             <div class="hero-buttons">
                 <a href="#" class="hero-btn primary-btn" id="heroDownloadBtn">
                     <i class="fas fa-download"></i> Descargar Beta
@@ -831,7 +900,7 @@
                     <span class="feature-badge">MAPA NOCTURNO</span>
                     <span class="feature-badge">SKINS TERROR</span>
                     <span class="feature-badge green-badge">NUEVOS MOVIMIENTOS</span>
-                    <span class="feature-badge">GRÁFICOS SMOOT</span>
+                    <span class="feature-badge">GRÁFICOS SUPER SMOOTH</span>
                 </div>
                 
                 <a href="#" class="event-link" id="shareBtn">
@@ -871,7 +940,7 @@
                 <div class="feature-icon">
                     <i class="fas fa-tachometer-alt"></i>
                 </div>
-                <h3>Gráficos Smoot</h3>
+                <h3>Gráficos Super Smooth</h3>
                 <p>Tecnología de renderizado optimizado para mejor rendimiento sin sacrificar calidad visual.</p>
             </div>
             
@@ -932,7 +1001,7 @@
             </button>
             
             <p style="font-size: 8px; color: #aaa; margin-top: 15px;">
-                <i class="fas fa-info-circle"></i> Versión optimizada con gráficos Smoot para mejor rendimiento
+                <i class="fas fa-info-circle"></i> Versión optimizada con gráficos Super Smooth para mejor rendimiento
             </p>
         </div>
     </section>
@@ -962,7 +1031,16 @@
                 <i class="fas fa-users"></i> <span id="downloadCount">0</span> personas ya han descargado esta beta
             </div>
             
-            <div class="modal-buttons">
+            <!-- CAPTCHA Section -->
+            <div class="captcha-container" id="captchaContainer">
+                <p>Por favor, completa el CAPTCHA para ver los enlaces de descarga:</p>
+                <div class="captcha-text" id="captchaText"></div>
+                <input type="text" class="captcha-input" id="captchaInput" placeholder="Ingresa el texto de arriba">
+                <button class="captcha-btn" id="verifyCaptchaBtn">Verificar</button>
+                <div class="captcha-error" id="captchaError">El texto no coincide. Inténtalo de nuevo.</div>
+            </div>
+            
+            <div class="modal-buttons" id="downloadButtons">
                 <a href="https://www.mediafire.com/file/b69ozjmh27439zc/pubgM_beta4.0_tilinesfc%252832_bits%2529.apk/file" class="modal-btn bit32-btn" id="32bitDownload">
                     <i class="fas fa-mobile-alt"></i> Versión 32 bits (1.03GB)
                 </a>
@@ -971,7 +1049,7 @@
                 </a>
             </div>
             
-            <ul class="modal-features">
+            <ul class="modal-features" id="featuresList">
                 <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> Ambas versiones incluyen gráficos Smoot</li>
                 <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> 32 bits: Mayor compatibilidad</li>
                 <li><i class="fas fa-check" style="color: var(--halloween-green);"></i> 64 bits: Mejor rendimiento</li>
@@ -981,7 +1059,6 @@
     </div>
 
     <script>
-        
         // Preloader
         window.addEventListener('load', function() {
             setTimeout(function() {
@@ -1075,10 +1152,15 @@
         const heroDownloadBtn = document.getElementById('heroDownloadBtn');
         const footerDownloadBtn = document.getElementById('footerDownloadBtn');
         const closeModal = document.querySelector('.close-modal');
+        const downloadButtons = document.getElementById('downloadButtons');
+        const featuresList = document.getElementById('featuresList');
         
         function openModal() {
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            
+            // Reset CAPTCHA state when opening modal
+            resetCaptcha();
         }
         
         function closeModalFunc() {
@@ -1108,7 +1190,8 @@
                 closeModalFunc();
             }
         });
-          document.getElementById('shareBtn').addEventListener('click', function(e) {
+        
+        document.getElementById('shareBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const currentUrl = window.location.href;
             const title = 'PUBG Mobile Halloween Beta 4.0 | TILINES FC';
@@ -1146,101 +1229,104 @@
             
             document.body.removeChild(textarea);
         }
-             const COUNTER_NAMESPACE = 'tilinesfc';
-    const COUNTER_KEY = 'pubgbeta';
-    
-    async function updateCounter() {
-        try {
-            const response = await fetch(`https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
-            const data = await response.json();
-            document.getElementById('downloadCount').textContent = data.value || 0;
-        } catch (error) {
-            console.error("Error al obtener contador:", error);
-        }
-    }
-    
-    async function incrementCounter() {
-        try {
-            const response = await fetch(`https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
-            const data = await response.json();
-            document.getElementById('downloadCount').textContent = data.value;
-            return data.value;
-        } catch (error) {
-            console.error("Error al incrementar contador:", error);
-            return null;
-        }
-    }
-    
-    // Configurar botones
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCounter();
         
-        document.getElementById('32bitDownload').addEventListener('click', function(e) {
-            e.preventDefault();
-            incrementCounter().then(() => {
-                window.location.href = this.href;
-            });
+        // CAPTCHA functionality
+        const captchaText = document.getElementById('captchaText');
+        const captchaInput = document.getElementById('captchaInput');
+        const verifyCaptchaBtn = document.getElementById('verifyCaptchaBtn');
+        const captchaError = document.getElementById('captchaError');
+        const captchaContainer = document.getElementById('captchaContainer');
+        
+        function generateCaptcha() {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return captcha;
+        }
+        
+        function resetCaptcha() {
+            // Hide download buttons and features
+            downloadButtons.style.display = 'none';
+            featuresList.style.display = 'none';
+            
+            // Show CAPTCHA container
+            captchaContainer.style.display = 'block';
+            
+            // Generate new CAPTCHA
+            const newCaptcha = generateCaptcha();
+            captchaText.textContent = newCaptcha;
+            captchaInput.value = '';
+            captchaError.style.display = 'none';
+        }
+        
+        // Initialize CAPTCHA
+        resetCaptcha();
+        
+        verifyCaptchaBtn.addEventListener('click', function() {
+            const userInput = captchaInput.value.trim();
+            const captchaCode = captchaText.textContent;
+            
+            if (userInput === captchaCode) {
+                // CAPTCHA correcto
+                captchaError.style.display = 'none';
+                captchaContainer.style.display = 'none';
+                
+                // Mostrar botones de descarga y características
+                downloadButtons.style.display = 'flex';
+                featuresList.style.display = 'block';
+            } else {
+                // CAPTCHA incorrecto
+                captchaError.style.display = 'block';
+                resetCaptcha();
+            }
         });
         
-        document.getElementById('64bitDownload').addEventListener('click', function(e) {
-            e.preventDefault();
-            incrementCounter().then(() => {
-                window.location.href = this.href;
+        // Counter functionality
+        const COUNTER_NAMESPACE = 'tilinesfc';
+        const COUNTER_KEY = 'pubgbeta';
+        
+        async function updateCounter() {
+            try {
+                const response = await fetch(`https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+                const data = await response.json();
+                document.getElementById('downloadCount').textContent = data.value || 0;
+            } catch (error) {
+                console.error("Error al obtener contador:", error);
+            }
+        }
+        
+        async function incrementCounter() {
+            try {
+                const response = await fetch(`https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+                const data = await response.json();
+                document.getElementById('downloadCount').textContent = data.value;
+                return data.value;
+            } catch (error) {
+                console.error("Error al incrementar contador:", error);
+                return null;
+            }
+        }
+        
+        // Configurar botones
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounter();
+            
+            document.getElementById('32bitDownload').addEventListener('click', function(e) {
+                e.preventDefault();
+                incrementCounter().then(() => {
+                    window.location.href = this.href;
+                });
+            });
+            
+            document.getElementById('64bitDownload').addEventListener('click', function(e) {
+                e.preventDefault();
+                incrementCounter().then(() => {
+                    window.location.href = this.href;
+                });
             });
         });
-    });
-         const API_ENDPOINT = '/api/counter';
-  
-  async function updateCounter() {
-    try {
-      const response = await fetch(API_ENDPOINT);
-      if (!response.ok) throw new Error('Error en la respuesta');
-      const data = await response.json();
-      document.getElementById('downloadCount').textContent = data.count;
-    } catch (error) {
-      console.error("Error al obtener contador:", error);
-      document.getElementById('downloadCount').textContent = "Error";
-    }
-  }
-  
-  async function registerDownload() {
-    try {
-      const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (!response.ok) throw new Error('Error al incrementar');
-      
-      const data = await response.json();
-      document.getElementById('downloadCount').textContent = data.count;
-      return data.count;
-    } catch (error) {
-      console.error("Error al registrar descarga:", error);
-      return null;
-    }
-  }
-
-  // Configuración mejorada de los botones
-  document.addEventListener('DOMContentLoaded', function() {
-    updateCounter();
-    
-    const handleDownload = async (e, url) => {
-      e.preventDefault();
-      await registerDownload();
-      window.location.href = url;
-    };
-    
-    document.getElementById('32bitDownload').addEventListener('click', (e) => {
-      handleDownload(e, 'https://www.mediafire.com/file/...32bits.apk/file');
-    });
-    
-    document.getElementById('64bitDownload').addEventListener('click', (e) => {
-      handleDownload(e, 'https://www.mediafire.com/file/...64bits.apk/file');
-    });
-  });
     </script>
 </body>
 </html>
