@@ -1,14 +1,15 @@
 // api/counter.js
-import { incrementCounter, getCount } from '../../lib/counter';
+let count = 0;
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     // Incrementar contador
-    const newCount = await incrementCounter();
-    return res.status(200).json({ count: newCount });
+    count += 1;
+    console.log('Nuevo contador:', count); // Para depuración
+    return res.status(200).json({ count });
   } else {
     // Obtener contador actual
-    const count = await getCount();
+    console.log('Contador actual:', count); // Para depuración
     return res.status(200).json({ count });
   }
 }
