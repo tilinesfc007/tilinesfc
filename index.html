@@ -1051,7 +1051,7 @@
             </div>
             <!--
             <img src="./img/beta.jpg" alt="Slider 1" class="active">-->
-            <img src="./img-temp/filtadoss.jpg" alt="Slider 4" class="active">
+            <img src="./filtraciones/5.jpg" alt="Slider 4" class="active">
             <img src="./img-temp/filtrados.jpg" alt="Slider 5">
             <img src="./filtraciones/portada.jpg" alt="Slider 2">
             <img src="./img/s12k.jpg" alt="Slider 3">
@@ -1379,6 +1379,7 @@
     </section>
     
     <!-- Modal de Nueva Temporada -->
+ <!-- Modal de Nueva Temporada -->
 <div class="modal-overlay" id="seasonModal">
     <div class="modal-container">
         <button class="modal-close" id="closeModal">&times;</button>
@@ -1394,11 +1395,23 @@
                     <img src="./img-temp/colab.avif" alt="Colaboraciones">
                     <div class="gallery-caption">COLABORACION TRANSFORMERS</div>
                 </div>
+                <!-- Nuevas imágenes con letrero de filtraciones -->
+                <div class="gallery-item" data-index="2">
+                    <div class="leak-badge">FILTRACIONES</div>
+                    <img src="./filtraciones/1.jpg" alt="Filtración 1">
+                    <div class="gallery-caption">PRIZE PATH Kaiju No. 8</div>
+                </div>
+                <div class="gallery-item" data-index="3">
+                    <div class="leak-badge">FILTRACIONES</div>
+                    <img src="./filtraciones/3.jpg" alt="Filtración 2">
+                    <div class="gallery-caption">PRIZE PATH Kaiju No. 8</div>
+                </div>
             </div>
             <div class="gallery-nav">
                 <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
             </div>
+            <div class="gallery-indicators" id="galleryIndicators"></div>
         </div>
         
         <ul class="novedades-list">
@@ -1421,6 +1434,13 @@
                 <div>
                     <h4>COLABORACION TRANSFORMERS</h4>
                     <p>Disfruta de unas de las mejores colaboraciones de PUBG MOBILE. (Finaliza <strong style="color: blue;">Prize</strong> <strong style="color: red;">Path</strong> 02 septiembre 2025)</p>
+                </div>
+            </li>
+            <li>
+                <i class="fas fa-star"></i>
+                <div>
+                    <h4>Nuevas Filtraciones Exclusivas</h4>
+                    <p>Contenido exclusivo que llegará en próximas actualizaciones, disponible antes que nadie.</p>
                 </div>
             </li>
         </ul>
@@ -1469,6 +1489,7 @@
         </div>
     </div>
 </div>
+
 
     <button id="openGameBtn" title="Juegos TILINES">
         <i class="fas fa-gamepad"></i>
@@ -1863,9 +1884,5 @@ window.addEventListener('load', function() {
   });
   
     </script>
-    <script id="chatBroEmbedCode">/* Chatbro Widget Embed Code Start */function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:'undefined'==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error('Chatbro loading error')},xhr.open('GET','https://www.chatbro.com/embed.js?'+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}/* Chatbro Widget Embed Code End */ChatbroLoader({encodedChatId: '097fo'});
-    </script>
 </body>
-
 </html>
-
