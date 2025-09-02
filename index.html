@@ -933,6 +933,148 @@
         font-size: 0.8rem;
     }
 }
+
+       #videoModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #videoModal .modal-container {
+            background-color: #111;
+            border: 2px solid #FF6B00;
+            border-radius: 8px;
+            max-width: 90%;
+            width: 800px;
+            max-height: 80vh;
+            overflow: auto;
+            position: relative;
+        }
+
+        #videoModal .modal-title {
+            color: #FF6B00;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+        }
+
+        #videoModal .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
+         .floating-notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #FF6B00;
+            color: white;
+            z-index: 100;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-notification img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .floating-notification {
+                display: flex;
+            }
+            
+            .version-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .version-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .version-header h3 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+            
+            .version-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .version-countdown .countdown-container {
+                gap: 5px;
+            }
+            
+            .version-countdown .countdown-number {
+                font-size: 1.2rem;
+                min-width: 40px;
+                padding: 8px;
+            }
+            
+            .feature-card {
+                padding: 12px;
+            }
+            
+            .feature-icon {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 12px;
+            }
+            
+            .feature-icon i {
+                font-size: 1.1rem;
+            }
+            
+            .feature-content h4 {
+                font-size: 0.95rem;
+            }
+            
+            .feature-content p {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -965,38 +1107,66 @@
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
-         <!--
-
-<div class="notification-bell" id="notificationBell">
-    <i class="fas fa-bell"></i>
-    <div class="notification-dot"></div>
-</div>
-
-<div class="notification-container" id="notificationContainer">
-    <div class="notification-header">
-        <h4>Notificaciones</h4>
-        <button class="notification-close" id="notificationClose">&times;</button>
-    </div>
-
-    <a href="./beta.html" class="notification-item">
-        <div class="notification-img">
-            <img src="./img/beta.jpg" alt="Beta se acerca">
+         <div class="notification-bell" id="notificationBell">
+            <i class="fas fa-bell"></i>
+            <div class="notification-dot"></div>
         </div>
 
-        <div class="notification-content">
-            <h5>¡Beta se acerca!</h5>
-            <p>Prueba las nuevas funciones antes que nadie</p>
-            <div class="notification-time">Hace 1 hora</div>
+        <div class="notification-container" id="notificationContainer">
+            <div class="notification-header">
+                <h4>Notificaciones</h4>
+                <button class="notification-close" id="notificationClose">&times;</button>
+            </div>
+
+            <a href="#" class="notification-item" id="royalePassNotification">
+                <div class="notification-img">
+                    <img src="filtraciones/pase.jpg" alt="ROYALE PASS">
+                </div>
+                <div class="notification-content">
+                    <h5>ROYALE PASS</h5>
+                    <p>pase A15 pronto</p>
+                    <div class="notification-time" id="royalePassTime">Hace 1 minuto</div>
+                </div>
+            </a>
+            
+            <a href="#" class="notification-item" id="prizePathNotification">
+                <div class="notification-img">
+                    <img src="filtraciones/1.jpg" alt="Prize Path KAIYU">
+                </div>
+                <div class="notification-content">
+                    <h5>Prize Path KAIYU</h5>
+                    <p>Nuevo contenido disponible</p>
+                    <div class="notification-time" id="prizePathTime">Hace 2 minutos</div>
+                </div>
+            </a>
+            
+            <div class="notification-footer">
+                <a href="#">Ver todas las notificaciones</a>
+            </div>
         </div>
-        
-    </a>
-    
-    <div class="notification-footer">
-        <a href="#">Ver todas las notificaciones</a>
-    </div>
-</div>
--->
     </header>
+
+    <div class="floating-notification" id="floatingNotification">
+        <img src="filtraciones/1.jpg" alt="Prize Path KAIYU">
+    </div>
+
+     <div class="modal-overlay" id="videoModal">
+        <div class="modal-container">
+            <button class="modal-close" id="closeVideoModal">&times;</button>
+            <h3 class="modal-title">NUEVO VIDEO EXCLUSIVO</h3>
+            
+            <div class="video-container">
+                <video controls id="introVideo">
+                    <source src="./videos/trailer.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="cta-button" id="closeVideoBtn">CONTINUAR AL SITIO</button>
+            </div>
+        </div>
+    </div>
     
     <!-- Hero Section -->
     <section class="hero">
@@ -1050,9 +1220,9 @@
                 <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
             <img src="./filtraciones/5.jpg" alt="Slider 4" class="active">
-            <img src="./img/akmman.jpg" alt="Slider 1">
-            <img src="./img-temp/filtrados.jpg" alt="Slider 5">
-            <img src="./img/s12k.jpg" alt="Slider 3">
+            <img src="./filtraciones/pase.jpg" alt="Slider 1">
+            <img src="./img-temp/cola.jpg" alt="Slider 3">
+            <img src="./img/akmman.jpg" alt="Slider 5">
         </div>
     </section>
     
@@ -1110,7 +1280,7 @@
                         <div class="countdown-date">10 DE SEPTIEMBRE 2025</div>
                     </div>
                     
-                    <a href="#" class="read-more" id="openSeasonModal">Más información| FILTRACIONES NUEVAS <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="read-more" id="openSeasonModal">Más información <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
@@ -1592,6 +1762,40 @@
     </div>
     <script src="./script.js"></script>
     <script>
+          function updateNotificationTimes() {
+            const royalePassTime = document.getElementById('royalePassTime');
+            const prizePathTime = document.getElementById('prizePathTime');
+            
+            // Inicializar tiempos (en segundos)
+            let royalePassSeconds = 60;
+            let prizePathSeconds = 120;
+            
+            // Función para formatear el tiempo
+            function formatTime(seconds) {
+                if (seconds < 60) {
+                    return `Hace ${seconds} segundo${seconds !== 1 ? 's' : ''}`;
+                } else if (seconds < 3600) {
+                    const minutes = Math.floor(seconds / 60);
+                    return `Hace ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+                } else if (seconds < 86400) {
+                    const hours = Math.floor(seconds / 3600);
+                    return `Hace ${hours} hora${hours !== 1 ? 's' : ''}`;
+                } else {
+                    const days = Math.floor(seconds / 86400);
+                    return `Hace ${days} día${days !== 1 ? 's' : ''}`;
+                }
+            }
+            
+            // Actualizar tiempos cada segundo
+            setInterval(() => {
+                royalePassSeconds++;
+                prizePathSeconds++;
+                
+                royalePassTime.textContent = formatTime(royalePassSeconds);
+                prizePathTime.textContent = formatTime(prizePathSeconds);
+            }, 1000);
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Abrir modal de temporada
             const openSeasonModal = document.getElementById('openSeasonModal');
@@ -1883,5 +2087,4 @@ window.addEventListener('load', function() {
   
     </script>
 </body>
-
 </html>
